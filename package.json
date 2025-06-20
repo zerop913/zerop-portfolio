@@ -9,16 +9,27 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "clsx": "^2.1.1",
+    "framer-motion": "^12.18.1",
+    "geist": "^1.4.2",
+    "next": "15.3.4",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "next": "15.3.4"
+    "react-dom": "^19.0.0"
   },
   "devDependencies": {
-    "typescript": "^5",
+    "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "@tailwindcss/postcss": "^4",
-    "tailwindcss": "^4"
+    "autoprefixer": "^10.4.21",
+    "class-variance-authority": "^0.7.1",
+    "critters": "^0.0.25",
+    "cssnano": "^7.0.7",
+    "csso": "^5.0.5",
+    "postcss": "^8.5.6",
+    "postcss-class-prefix": "^0.3.0",
+    "postcss-hash-classname": "^0.4.0",
+    "tailwindcss": "^4",
+    "typescript": "^5"
   }
 }
