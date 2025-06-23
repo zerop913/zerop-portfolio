@@ -113,52 +113,48 @@ export default function Hero() {
                 >
                   {letter === " " ? "\u00A0" : letter}
                 </span>
-              ))}
+              ))}{" "}
             </h1>
             {/* Animated underline */}
             <div
-              className={`h-2 ${
+              className={`h-1 ${
                 isDark ? "bg-white" : "bg-black"
               } mx-auto transition-all duration-1000 ${
                 mounted ? "w-32" : "w-0"
               }`}
             ></div>
           </div>{" "}
-          {/* Dynamic title with typing skills */}
-          <div className="mb-8 sm:mb-12 h-20 sm:h-24 md:h-28 lg:h-32 flex items-center justify-center">
+          {/* Dynamic typing skills */}
+          <div className="mb-8 sm:mb-12 h-12 sm:h-14 md:h-16 lg:h-18 flex items-center justify-center">
             <div
-              className={`text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-light ${
-                isDark ? "text-gray-300" : "text-gray-600"
+              className={`text-lg sm:text-xl md:text-2xl lg:text-3xl ${
+                isDark ? "text-gray-400" : "text-gray-500"
               } ${mounted ? "animate-fade-in-delay-1" : "opacity-0"}`}
             >
-              <span>{personalData.title}</span>{" "}
-              <div className="text-xl sm:text-2xl md:text-3xl lg:text-4xl mt-2 h-10 sm:h-12 md:h-14 lg:h-16 flex items-center justify-center">
-                <div className="font-mono flex items-center">
+              <div className="font-mono flex items-center justify-center">
+                <span
+                  className={`${isDark ? "text-green-400" : "text-green-600"}`}
+                >
+                  import&nbsp;
+                </span>
+                <span className={`${isDark ? "text-white" : "text-black"}`}>
+                  {displayedSkill}
+                </span>
+                {showSkillCursor && (
                   <span
-                    className={`${
-                      isDark ? "text-green-400" : "text-green-600"
+                    className={`inline-block w-0.5 h-5 sm:h-6 md:h-7 lg:h-8 animate-blink ${
+                      isDark ? "bg-green-400" : "bg-green-600"
                     }`}
-                  >
-                    &lt; {displayedSkill}
-                  </span>{" "}
-                  {showSkillCursor && (
-                    <span
-                      className={`inline-block w-0.5 h-5 sm:h-6 md:h-7 lg:h-8 ml-1 animate-pulse ${
-                        isDark ? "bg-green-400" : "bg-green-600"
-                      }`}
-                    />
-                  )}
-                  <span
-                    className={`${
-                      isDark ? "text-green-400" : "text-green-600"
-                    }`}
-                  >
-                    {displayedSkill && " />"}
-                  </span>
-                </div>
+                  />
+                )}
+                <span
+                  className={`${isDark ? "text-gray-500" : "text-gray-400"}`}
+                >
+                  &nbsp;from&nbsp;'skills'
+                </span>
               </div>
             </div>
-          </div>{" "}
+          </div>
           {/* Description */}
           <div
             className={`mb-12 font-mono text-sm md:text-base leading-relaxed max-w-3xl mx-auto transition-opacity duration-1000 ${

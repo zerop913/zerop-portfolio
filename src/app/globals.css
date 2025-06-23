@@ -245,6 +245,10 @@ body.dark {
   animation: fade-in-delay-4 3.5s ease-out forwards;
 }
 
+.animate-blink {
+  animation: blink 1s infinite;
+}
+
 /* Code editor styling */
 .code-editor {
   font-family: "SF Mono", "Monaco", "Inconsolata", "Roboto Mono", "Courier New",

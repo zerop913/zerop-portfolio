@@ -129,11 +129,9 @@ export default function Contact() {
           >
             Готовы обсудить ваш проект?
           </p>
-        </div>
-
-        <div className="grid lg:grid-cols-2 gap-12">
-          {" "}
-          {/* Terminal Window */}
+        </div>{" "}
+        <div className="max-w-4xl mx-auto">
+          {/* Unified Terminal Window */}
           <div
             className={`rounded-lg shadow-xl border transition-all duration-300 ${
               isDark ? "border-gray-700" : "border-gray-300"
@@ -154,7 +152,7 @@ export default function Contact() {
                     isDark ? "text-gray-300" : "text-gray-600"
                   }`}
                 >
-                  Terminal - Contact
+                  Terminal - Contact Session
                 </span>
               </div>
               <div className="flex items-center space-x-2">
@@ -171,81 +169,143 @@ export default function Contact() {
                   {isConnected ? "Connected" : "Connecting..."}
                 </span>
               </div>
-            </div>{" "}
+            </div>
+
             {/* Terminal Content */}
             <div
               className={`p-6 font-mono text-sm ${
                 isDark
                   ? "text-green-400 bg-gray-900"
                   : "text-green-700 bg-white"
-              } rounded-b-lg relative overflow-hidden`}
+              } rounded-b-lg relative overflow-hidden min-h-[400px]`}
             >
-              {" "}
               <div className="relative z-10">
-                <pre className="whitespace-pre-wrap">
-                  {terminalOutput}
-                  {jsonVisible && (
-                    <div
-                      className={`animate-fade-in mt-1 ${
-                        isDark ? "text-blue-300" : "text-green-700"
-                      }`}
-                    >
-                      {jsonOutput}
-                    </div>
-                  )}
-                  {currentPhase === "final" && (
-                    <div className="mt-1">{finalOutput}</div>
-                  )}{" "}
-                  {showCursor && currentPhase !== "final" && (
-                    <span
-                      className={`inline-block w-2 h-5 ml-1 ${
-                        isDark ? "bg-green-400" : "bg-green-700"
-                      }`}
-                    ></span>
-                  )}
-                  {showCursor &&
-                    currentPhase === "final" &&
-                    !isTypingComplete && (
-                      <span
-                        className={`inline-block w-2 h-5 ml-1 ${
-                          isDark ? "bg-green-400" : "bg-green-700"
-                        }`}
-                      ></span>
-                    )}
-                </pre>
+                {/* Animated Connection Commands */}
+                <pre className="whitespace-pre-wrap">{terminalOutput}</pre>
 
-                {/* Interactive Prompt */}
+                {/* JSON Output */}
+                {jsonVisible && (
+                  <div
+                    className={`animate-fade-in mt-4 ${
+                      isDark ? "text-green-400" : "text-green-700"
+                    }`}
+                  >
+                    {jsonOutput}
+                  </div>
+                )}
+
+                {/* Additional Commands after JSON */}
+                {currentPhase === "final" && (
+                  <div className="mt-4">
+                    <div className="mb-4">
+                      <div
+                        className={`${
+                          isDark ? "text-green-400" : "text-green-600"
+                        }`}
+                      >
+                        <span className="opacity-60">ivan@portfolio:~$</span>{" "}
+                        <span>whoami</span>
+                      </div>
+                      <div
+                        className={`ml-4 mt-1 ${
+                          isDark ? "text-gray-300" : "text-gray-700"
+                        }`}
+                      >
+                        {personalData.name} - {personalData.title}
+                      </div>
+                    </div>
+
+                    <div className="mb-4">
+                      <div
+                        className={`${
+                          isDark ? "text-green-400" : "text-green-600"
+                        }`}
+                      >
+                        <span className="opacity-60">ivan@portfolio:~$</span>{" "}
+                        <span>contact --info</span>
+                      </div>
+                      <div
+                        className={`ml-4 mt-1 space-y-1 ${
+                          isDark ? "text-gray-300" : "text-gray-700"
+                        }`}
+                      >
+                        <div className="flex items-center space-x-2">
+                          <span
+                            className={`${
+                              isDark ? "text-purple-400" : "text-purple-600"
+                            }`}
+                          >
+                            →
+                          </span>
+                          <span>Platform: Telegram</span>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                          <span
+                            className={`${
+                              isDark ? "text-purple-400" : "text-purple-600"
+                            }`}
+                          >
+                            →
+                          </span>
+                          <span>Username: @polier09</span>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                          <span
+                            className={`${
+                              isDark ? "text-purple-400" : "text-purple-600"
+                            }`}
+                          >
+                            →
+                          </span>
+                          <span>Status: </span>
+                          <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                          <span
+                            className={`${
+                              isDark ? "text-green-400" : "text-green-600"
+                            }`}
+                          >
+                            Online
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div>
+                      <pre className="whitespace-pre-wrap">{finalOutput}</pre>
+                    </div>
+                  </div>
+                )}
+
+                {/* Cursor during typing */}
+                {showCursor && !isTypingComplete && (
+                  <span
+                    className={`inline-block w-2 h-5 ml-1 ${
+                      isDark ? "bg-green-400" : "bg-green-700"
+                    }`}
+                  ></span>
+                )}
+
+                {/* Interactive Prompt after completion */}
                 {isTypingComplete && (
-                  <div className="mt-6 space-y-2 animate-fade-in">
+                  <div className="mt-6 space-y-4 animate-fade-in">
                     <div
                       className={`flex items-center space-x-2 ${
                         isDark ? "text-green-400" : "text-green-700"
                       }`}
                     >
                       <span>ivan@portfolio:~$</span>
-                      <span
-                        className={`${
-                          isDark ? "text-gray-400" : "text-gray-600"
-                        }`}
-                      >
-                        _
-                      </span>
+                      <span className="animate-pulse">_</span>
                     </div>
 
-                    {/* Available Commands */}
+                    {/* Help text */}
                     <div
-                      className={`mt-4 text-xs ${
+                      className={`text-xs ${
                         isDark ? "text-gray-500" : "text-gray-400"
-                      }`}
+                      } space-y-1`}
                     >
-                      <div className="mb-2 opacity-60">
-                        # Available commands:
-                      </div>
-                      <div className="space-y-1 opacity-40">
-                        <div>./view-portfolio # Browse my work</div>
-                        <div>./check-skills # List technologies</div>
-                        <div>./send-message # Quick contact</div>
-                        <div>./download-cv # Get resume</div>
+                      <div className="opacity-60"># Ready for connection</div>
+                      <div className="opacity-40">
+                        Use the button below to start conversation
                       </div>
                     </div>
                   </div>
@@ -253,159 +313,30 @@ export default function Contact() {
               </div>
             </div>
           </div>
-          {/* Contact Actions */}
+
+          {/* Connect Button */}
+          <div className="mt-6 text-center">
+            <Button
+              href={personalData.telegramUrl}
+              variant="terminal"
+              size="lg"
+              className="min-w-[280px]"
+              external
+            >
+              ./connect-telegram.sh
+            </Button>
+          </div>
+
+          {/* Note */}
           <div
-            className={`space-y-8 ${
-              isVisible ? "scale-100 opacity-100" : "scale-95 opacity-0"
-            } transition-all duration-300 delay-500`}
+            className={`text-center text-sm mt-6 ${
+              isDark ? "text-gray-400" : "text-gray-500"
+            } font-mono`}
           >
-            {/* Profile Card */}
-            <div
-              className={`${
-                isDark
-                  ? "bg-gray-800 border-gray-700"
-                  : "bg-gray-50 border-gray-200"
-              } rounded-lg border p-8`}
-            >
-              <div className="text-center mb-6">
-                <div
-                  className={`w-24 h-24 mx-auto mb-6 rounded-full ${
-                    isDark ? "bg-gray-700" : "bg-white"
-                  } border-4 border-green-500 flex items-center justify-center text-3xl font-bold ${
-                    isDark ? "text-white" : "text-gray-900"
-                  }`}
-                >
-                  {personalData.name[0]}
-                </div>
-
-                <h3
-                  className={`text-2xl font-bold mb-2 ${
-                    isDark ? "text-white" : "text-gray-900"
-                  }`}
-                >
-                  {personalData.name}
-                </h3>
-
-                <p
-                  className={`${
-                    isDark ? "text-gray-300" : "text-gray-600"
-                  } font-mono text-sm`}
-                >
-                  {personalData.title}
-                </p>
-              </div>
-              {/* Quick Stats */}
-              <div className="grid grid-cols-2 gap-4 mb-8">
-                <div
-                  className={`${
-                    isDark ? "bg-gray-700" : "bg-white"
-                  } rounded-lg p-4 text-center border ${
-                    isDark ? "border-gray-600" : "border-gray-200"
-                  }`}
-                >
-                  <div
-                    className={`text-2xl font-bold mb-1 ${
-                      isDark ? "text-green-400" : "text-green-600"
-                    }`}
-                  >
-                    &lt;24h
-                  </div>
-                  <div
-                    className={`text-xs font-mono ${
-                      isDark ? "text-gray-400" : "text-gray-500"
-                    }`}
-                  >
-                    response_time
-                  </div>
-                </div>
-
-                <div
-                  className={`${
-                    isDark ? "bg-gray-700" : "bg-white"
-                  } rounded-lg p-4 text-center border ${
-                    isDark ? "border-gray-600" : "border-gray-200"
-                  }`}
-                >
-                  <div
-                    className={`text-2xl font-bold mb-1 ${
-                      isDark ? "text-green-400" : "text-green-600"
-                    }`}
-                  >
-                    24/7
-                  </div>
-                  <div
-                    className={`text-xs font-mono ${
-                      isDark ? "text-gray-400" : "text-gray-500"
-                    }`}
-                  >
-                    availability
-                  </div>
-                </div>
-              </div>{" "}
-              {/* Contact Button */}
-              <Button
-                href={personalData.telegramUrl}
-                variant="terminal"
-                size="lg"
-                className="w-full"
-                external
-              >
-                ./connect-telegram.sh
-              </Button>
-            </div>
-
-            {/* Additional Info */}
-            <div
-              className={`${
-                isDark
-                  ? "bg-gray-800 border-gray-700"
-                  : "bg-gray-50 border-gray-200"
-              } rounded-lg border p-6`}
-            >
-              <h4
-                className={`font-mono text-sm mb-4 ${
-                  isDark ? "text-green-400" : "text-green-600"
-                }`}
-              >
-                # Connection Info
-              </h4>
-
-              <div className="space-y-3 font-mono text-sm">
-                <div className="flex justify-between">
-                  <span className={isDark ? "text-gray-300" : "text-gray-600"}>
-                    protocol:
-                  </span>
-                  <span className={isDark ? "text-white" : "text-gray-900"}>
-                    "telegram"
-                  </span>
-                </div>
-                {/* <div className="flex justify-between">
-                  <span className={isDark ? "text-gray-300" : "text-gray-600"}>
-                    encryption:
-                  </span>
-                  <span className={isDark ? "text-white" : "text-gray-900"}>
-                    "end-to-end"
-                  </span>
-                </div> */}
-                <div className="flex justify-between">
-                  <span className={isDark ? "text-gray-300" : "text-gray-600"}>
-                    status:
-                  </span>
-                  <span className="text-green-500">"online"</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Note */}
-            <div
-              className={`text-center text-sm ${
-                isDark ? "text-gray-400" : "text-gray-500"
-              } font-mono`}
-            >
-              #{" "}
-              {personalData.contactNote ||
-                "Let's build something amazing together!"}
-            </div>
+            {" "}
+            #{" "}
+            {personalData.contactNote ||
+              "Let's build something amazing together!"}
           </div>
         </div>
       </div>

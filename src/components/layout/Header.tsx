@@ -101,13 +101,11 @@ export default function Header({ onMenuToggle }: HeaderProps) {
               <button
                 key={index}
                 onClick={() => scrollToSection(item.href)}
-                className={`group relative flex items-center space-x-2 transition-all duration-300 font-mono text-sm py-2 px-3 lg:px-4 rounded-md hover:scale-105 ${
-                  isDark
-                    ? "text-gray-300 hover:text-green-400 hover:bg-green-400/10"
-                    : "text-gray-600 hover:text-green-600 hover:bg-green-600/10"
+                className={`group relative font-mono text-sm py-2 px-3 lg:px-4 ${
+                  isDark ? "text-gray-300" : "text-gray-600"
                 }`}
               >
-                <span className="relative">
+                <span>
                   {item.label}
                   <span
                     className={`${
@@ -117,11 +115,14 @@ export default function Header({ onMenuToggle }: HeaderProps) {
                     {item.file}
                   </span>
                 </span>
-                <div
-                  className={`absolute -bottom-1 left-1/2 w-0 h-0.5 bg-current transition-all duration-300 group-hover:w-3/4 -translate-x-1/2 ${
-                    isDark ? "bg-green-400" : "bg-green-600"
+                {/* Анимированное подчёркивание */}
+                <span
+                  className={`absolute bottom-0 left-0 h-0.5 bg-gradient-to-r transition-all duration-300 ease-out w-0 group-hover:w-full ${
+                    isDark
+                      ? "from-green-400/80 to-green-400"
+                      : "from-green-600/80 to-green-600"
                   }`}
-                ></div>
+                ></span>
               </button>
             ))}
           </div>{" "}

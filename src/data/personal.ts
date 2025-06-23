@@ -1,6 +1,6 @@
 export const personalData = {
   name: "Ivan Smolin",
-  title: "Веб-разработчик",
+  title: "Web Developer",
   description:
     "Специализируюсь на веб-разработке и создании ботов. Работаю с современными технологиями для создания качественных цифровых решений.",
   telegramUrl: "https://t.me/polier09",
