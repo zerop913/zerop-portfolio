@@ -15,7 +15,7 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Иван - Веб-разработчик | Портфолио",
+  title: "Иван Смолин - Веб-разработчик | Портфолио",
   description:
     "Веб-разработчик специализирующийся на React, Next.js, TypeScript. Создание сайтов, интернет-магазинов и ботов.",
   keywords: [
@@ -29,11 +29,26 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Иван Смолин" }],
   openGraph: {
-    title: "Иван - Веб-разработчик",
+    title: "Иван Смолин - Веб-разработчик",
     description:
       "Портфолио веб-разработчика. Создание современных веб-приложений и ботов.",
     type: "website",
     locale: "ru_RU",
+    images: [
+      {
+        url: "/logo.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Иван Смолин - Веб-разработчик",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Иван Смолин - Веб-разработчик",
+    description:
+      "Портфолио веб-разработчика. Создание современных веб-приложений и ботов.",
+    images: ["/logo.jpg"],
   },
 };
 

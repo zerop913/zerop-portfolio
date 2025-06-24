@@ -262,7 +262,7 @@ export default function Header({ onMenuToggle }: HeaderProps) {
                     isDark ? "bg-green-400" : "bg-green-600"
                   }`}
                 ></div>
-                <span>статус: онлайн</span>
+                <span>status: online</span>
               </div>
 
               {/* Theme Toggle */}

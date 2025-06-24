@@ -5,7 +5,7 @@ export const projects = [
     description:
       "Разработка полнофункционального интернет-магазина по продаже персональных компьютеров с современным интерфейсом и удобной навигацией.",
     technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
-    githubUrl: "https://github.com/zerop913/only-pc-next.js",
+    liveUrl: "https://only-pc.ru",
     category: "E-commerce",
   },
   {

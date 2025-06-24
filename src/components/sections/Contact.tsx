@@ -180,9 +180,20 @@ export default function Contact() {
               } rounded-b-lg relative overflow-hidden min-h-[400px]`}
             >
               <div className="relative z-10">
+                {" "}
                 {/* Animated Connection Commands */}
-                <pre className="whitespace-pre-wrap">{terminalOutput}</pre>
-
+                <pre className="whitespace-pre-wrap">
+                  {terminalOutput}
+                  {showCursor &&
+                    !isTypingComplete &&
+                    currentPhase === "initial" && (
+                      <span
+                        className={`inline-block w-2 h-5 ${
+                          isDark ? "bg-green-400" : "bg-green-700"
+                        }`}
+                      ></span>
+                    )}
+                </pre>
                 {/* JSON Output */}
                 {jsonVisible && (
                   <div
@@ -193,7 +204,6 @@ export default function Contact() {
                     {jsonOutput}
                   </div>
                 )}
-
                 {/* Additional Commands after JSON */}
                 {currentPhase === "final" && (
                   <div className="mt-4">
@@ -271,20 +281,21 @@ export default function Contact() {
                     </div>
 
                     <div>
-                      <pre className="whitespace-pre-wrap">{finalOutput}</pre>
+                      <pre className="whitespace-pre-wrap">
+                        {finalOutput}
+                        {showCursor &&
+                          !isTypingComplete &&
+                          currentPhase === "final" && (
+                            <span
+                              className={`inline-block w-2 h-5 ${
+                                isDark ? "bg-green-400" : "bg-green-700"
+                              }`}
+                            ></span>
+                          )}
+                      </pre>
                     </div>
                   </div>
                 )}
-
-                {/* Cursor during typing */}
-                {showCursor && !isTypingComplete && (
-                  <span
-                    className={`inline-block w-2 h-5 ml-1 ${
-                      isDark ? "bg-green-400" : "bg-green-700"
-                    }`}
-                  ></span>
-                )}
-
                 {/* Interactive Prompt after completion */}
                 {isTypingComplete && (
                   <div className="mt-6 space-y-4 animate-fade-in">

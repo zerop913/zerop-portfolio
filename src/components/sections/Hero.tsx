@@ -9,8 +9,6 @@ import { useState, useEffect } from "react";
 export default function Hero() {
   const mounted = useClientOnly();
   const { isDark } = useTheme();
-
-  // State for skill typewriter animation only
   const [currentSkillIndex, setCurrentSkillIndex] = useState(0);
   const [displayedSkill, setDisplayedSkill] = useState("");
   const [showSkillCursor, setShowSkillCursor] = useState(true);
@@ -21,7 +19,6 @@ export default function Hero() {
 
     const skills = personalData.skills;
     let currentIndex = 0;
-
     const typeSkill = () => {
       const skill = skills[currentIndex];
       setDisplayedSkill("");
@@ -125,33 +122,45 @@ export default function Hero() {
             ></div>
           </div>{" "}
           {/* Dynamic typing skills */}
-          <div className="mb-8 sm:mb-12 h-12 sm:h-14 md:h-16 lg:h-18 flex items-center justify-center">
+          <div className="mb-8 sm:mb-12 min-h-[3rem] sm:min-h-[3.5rem] md:min-h-[4rem] lg:min-h-[4.5rem] flex items-center justify-center px-4">
             <div
-              className={`text-lg sm:text-xl md:text-2xl lg:text-3xl ${
+              className={`text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl ${
                 isDark ? "text-gray-400" : "text-gray-500"
-              } ${mounted ? "animate-fade-in-delay-1" : "opacity-0"}`}
+              } ${
+                mounted ? "animate-fade-in-delay-1" : "opacity-0"
+              } w-full max-w-sm sm:max-w-none`}
             >
-              <div className="font-mono flex items-center justify-center">
-                <span
-                  className={`${isDark ? "text-green-400" : "text-green-600"}`}
-                >
-                  import&nbsp;
-                </span>
-                <span className={`${isDark ? "text-white" : "text-black"}`}>
-                  {displayedSkill}
-                </span>
-                {showSkillCursor && (
+              <div className="font-mono flex items-center justify-center text-center">
+                <div className="flex flex-wrap items-center justify-center gap-x-1">
                   <span
-                    className={`inline-block w-0.5 h-5 sm:h-6 md:h-7 lg:h-8 animate-blink ${
-                      isDark ? "bg-green-400" : "bg-green-600"
-                    }`}
-                  />
-                )}
-                <span
-                  className={`${isDark ? "text-gray-500" : "text-gray-400"}`}
-                >
-                  &nbsp;from&nbsp;'skills'
-                </span>
+                    className={`${
+                      isDark ? "text-green-400" : "text-green-600"
+                    } whitespace-nowrap`}
+                  >
+                    import&nbsp;
+                  </span>
+                  <span
+                    className={`${
+                      isDark ? "text-white" : "text-black"
+                    } break-all sm:break-normal min-w-0`}
+                  >
+                    {displayedSkill}
+                  </span>
+                  {showSkillCursor && (
+                    <span
+                      className={`inline-block w-0.5 h-4 sm:h-5 md:h-6 lg:h-7 xl:h-8 animate-blink ${
+                        isDark ? "bg-green-400" : "bg-green-600"
+                      } ml-0.5`}
+                    />
+                  )}
+                  <span
+                    className={`${
+                      isDark ? "text-gray-500" : "text-gray-400"
+                    } whitespace-nowrap`}
+                  >
+                    &nbsp;from&nbsp;'skills'
+                  </span>
+                </div>
               </div>
             </div>
           </div>
