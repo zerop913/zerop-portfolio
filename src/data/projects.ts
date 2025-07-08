@@ -6,6 +6,7 @@ export const projects = [
       "Разработка полнофункционального интернет-магазина по продаже персональных компьютеров с современным интерфейсом и удобной навигацией.",
     technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
     liveUrl: "https://only-pc.ru",
+    githubUrl: "https://github.com/zerop913/only-pc-next.js",
     category: "E-commerce",
   },
   {
@@ -15,6 +16,7 @@ export const projects = [
       "Решение для интеграции системы 1С с искусственным интеллектом YandexGPT для автоматизации бизнес-процессов.",
     technologies: ["JavaScript", "API Integration", "1C", "YandexGPT"],
     liveUrl: "https://1c-yandex-cloud.vercel.app/",
+    githubUrl: "https://github.com/zerop913/1c-yandex-cloud",
     category: "Integration",
   },
   {

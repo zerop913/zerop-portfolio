@@ -314,17 +314,29 @@ const Projects = () => {
                           </div>
                         </div>{" "}
                         {/* Action Buttons */}
-                        <div className="flex space-x-3 mt-auto">
+                        <div className="flex flex-col space-y-2 mt-auto">
                           {project.liveUrl && (
                             <Button
                               variant="primary"
                               size="sm"
-                              className="flex-1"
+                              className="w-full"
                               onClick={() =>
                                 window.open(project.liveUrl, "_blank")
                               }
                             >
                               demo()
+                            </Button>
+                          )}
+                          {project.githubUrl && (
+                            <Button
+                              variant="secondary"
+                              size="sm"
+                              className="w-full"
+                              onClick={() =>
+                                window.open(project.githubUrl, "_blank")
+                              }
+                            >
+                              github()
                             </Button>
                           )}
                         </div>

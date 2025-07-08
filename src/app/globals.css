@@ -11,19 +11,26 @@ body {
   font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
 }
 
-/* Dark theme styles */
 body.dark {
   --background: #0a0a0a;
   --foreground: #ededed;
 }
 
-/* Smooth transitions for theme switching */
 * {
   transition: background-color 0.3s ease, color 0.3s ease,
     border-color 0.3s ease;
 }
 
-/* Custom animations - smooth and code-themed */
+::selection {
+  background-color: rgba(34, 197, 94, 0.3);
+  color: var(--foreground);
+}
+
+body.dark ::selection {
+  background-color: rgba(34, 197, 94, 0.4);
+  color: var(--foreground);
+}
+
 @keyframes fade-in {
   from {
     opacity: 0;
@@ -157,7 +164,6 @@ body.dark {
   }
 }
 
-/* Terminal animations and effects */
 @keyframes scan-line {
   0% {
     top: 0%;
@@ -224,7 +230,6 @@ body.dark {
   animation: code-scroll 20s linear infinite;
 }
 
-/* Animation classes */
 .animate-fade-in {
   animation: fade-in 1s ease-out forwards;
 }
@@ -249,7 +254,6 @@ body.dark {
   animation: blink 1s infinite;
 }
 
-/* Code editor styling */
 .code-editor {
   font-family: "SF Mono", "Monaco", "Inconsolata", "Roboto Mono", "Courier New",
     monospace;
@@ -266,7 +270,6 @@ body.dark {
   font-style: italic;
 }
 
-/* Terminal styling */
 .terminal-window {
   font-family: "SF Mono", "Monaco", "Inconsolata", "Roboto Mono", "Courier New",
     monospace;
@@ -307,7 +310,6 @@ body.dark {
   line-height: 1.5;
 }
 
-/* Smooth hover effects */
 .hover-lift {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -317,7 +319,6 @@ body.dark {
   box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
 }
 
-/* Button animations */
 .btn-scale {
   transition: transform 0.2s ease;
 }
@@ -330,7 +331,6 @@ body.dark {
   transform: scale(0.98);
 }
 
-/* Card animations */
 .card-hover {
   transition: all 0.3s ease;
 }
@@ -340,7 +340,6 @@ body.dark {
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
 }
 
-/* Code syntax highlighting */
 .code-keyword {
   color: #c792ea;
 }
@@ -360,7 +359,6 @@ body.dark {
   color: #89ddff;
 }
 
-/* Loading animations */
 .loading-dots::after {
   content: "";
   animation: loading-dots 1.5s infinite;
@@ -383,7 +381,6 @@ body.dark {
   }
 }
 
-/* Scroll animations */
 .scroll-fade-in {
   opacity: 0;
   transform: translateY(50px);
@@ -395,7 +392,6 @@ body.dark {
   transform: translateY(0);
 }
 
-/* Green accent colors */
 .text-accent {
   color: #10b981;
 }
@@ -406,7 +402,6 @@ body.dark {
   border-color: #10b981;
 }
 
-/* Dark mode friendly */
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
@@ -414,7 +409,6 @@ body.dark {
   }
 }
 
-/* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 8px;
 }
@@ -453,7 +447,6 @@ body.dark {
   color: #0891b2;
 }
 
-/* Dark theme syntax highlighting */
 @media (prefers-color-scheme: dark) {
   .syntax-comment {
     color: #9ca3af;
@@ -480,7 +473,6 @@ body.dark {
   }
 }
 
-/* Terminal styling */
 .terminal-window {
   background: #1a1a1a;
   border: 1px solid #333;
@@ -528,14 +520,12 @@ body.dark {
   line-height: 1.5;
 }
 
-/* Typing cursor effect */
 .typing-cursor::after {
   content: "|";
   animation: blink 1s infinite;
   color: #00ff00;
 }
 
-/* Code block styling */
 .code-block {
   background: #f8f9fa;
   border: 1px solid #e9ecef;
@@ -556,7 +546,6 @@ body.dark {
   }
 }
 
-/* Grid pattern for background */
 .bg-grid-pattern {
   background-image: linear-gradient(rgba(0, 0, 0, 0.02) 1px, transparent 1px),
     linear-gradient(90deg, rgba(0, 0, 0, 0.02) 1px, transparent 1px);
@@ -573,7 +562,6 @@ body.dark {
   }
 }
 
-/* Animation classes */
 .animate-fade-in {
   animation: fade-in 0.8s ease-out forwards;
 }
@@ -594,7 +582,6 @@ body.dark {
   animation: scroll-fade 0.8s ease-out forwards;
 }
 
-/* Hover effects */
 .hover-lift {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -610,7 +597,6 @@ body.dark {
   }
 }
 
-/* Button styles with code theme */
 .btn-code {
   font-family: "SF Mono", "Monaco", "Inconsolata", "Roboto Mono", "Courier New",
     monospace;
@@ -643,12 +629,10 @@ body.dark {
   left: 100%;
 }
 
-/* Smooth scrolling */
 html {
   scroll-behavior: smooth;
 }
 
-/* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
 }
@@ -676,7 +660,6 @@ html {
   }
 }
 
-/* Intersection observer animations */
 .fade-in-on-scroll {
   opacity: 0;
   transform: translateY(30px);
@@ -688,7 +671,6 @@ html {
   transform: translateY(0);
 }
 
-/* Utility classes for extreme effects */
 .matrix-bg {
   position: absolute;
   top: 0;
@@ -791,7 +773,6 @@ html {
   animation: circuit-flow 3s ease-in-out infinite;
 }
 
-/* Extreme grid background */
 .cyber-grid {
   background-image: linear-gradient(rgba(0, 255, 0, 0.03) 1px, transparent 1px),
     linear-gradient(90deg, rgba(0, 255, 0, 0.03) 1px, transparent 1px);
@@ -799,7 +780,6 @@ html {
   animation: grid-pattern 4s ease-in-out infinite alternate;
 }
 
-/* Terminal-style elements */
 .terminal-window {
   background: #000;
   border: 1px solid #333;
