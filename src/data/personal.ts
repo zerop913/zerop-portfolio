@@ -3,7 +3,7 @@ export const personalData = {
   title: "Web Developer",
   description:
     "Специализируюсь на веб-разработке и создании ботов. Работаю с современными технологиями для создания качественных цифровых решений.",
-  telegramUrl: "https://t.me/polier09",
+  telegramUrl: "https://t.me/zerop913",
   skills: [
     "React",
     "Next.js",

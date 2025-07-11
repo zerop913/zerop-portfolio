@@ -15,10 +15,15 @@ export default function Card({
     <div
       style={style}
       className={`
-        border border-gray-200 
+        backdrop-blur-sm bg-white/80 dark:bg-gray-900/80
+        border border-gray-200/60 dark:border-gray-700/60
         rounded-lg p-6 
-        ${hover ? "hover:shadow-sm" : ""} 
-        transition-all duration-200 
+        ${
+          hover
+            ? "hover:shadow-lg hover:bg-white/90 dark:hover:bg-gray-900/90"
+            : ""
+        } 
+        transition-all duration-300
         ${className}
       `}
     >
