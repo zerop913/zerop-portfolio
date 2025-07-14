@@ -28,4 +28,15 @@ export const projects = [
     liveUrl: "https://zerocubes.vercel.app/",
     category: "Education",
   },
+  {
+    id: 4,
+    title: "Портфолио для разработчика 1С",
+    description:
+      "Разработка персонального портфолио для разработчика 1С с акцентом на проекты и навыки в области 1С.",
+    technologies: ["Next.js", "TypeScript", "Tailwind CSS"],
+    liveUrl: "https://portfolio-varfolomeeva.vercel.app/",
+    githubUrl: "https://github.com/zerop913/portfolio-varfolomeeva",
+    category: "Personal",
+    isOrder: true,
+  },
 ];

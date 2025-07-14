@@ -7,12 +7,30 @@ import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { useTheme } from "@/hooks/useTheme";
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
+import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 
 const Projects = () => {
   const { isVisible, ref } = useScrollAnimation();
   const { isDark } = useTheme();
   const [activeTab, setActiveTab] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(0);
+  
+  const projectsPerPage = 3;
+  const totalPages = Math.ceil(projects.length / projectsPerPage);
+  
+  const getCurrentProjects = () => {
+    const startIndex = currentPage * projectsPerPage;
+    return projects.slice(startIndex, startIndex + projectsPerPage);
+  };
+  
+  const nextPage = () => {
+    setCurrentPage((prev) => (prev + 1) % totalPages);
+  };
+  
+  const prevPage = () => {
+    setCurrentPage((prev) => (prev - 1 + totalPages) % totalPages);
+  };
 
   useEffect(() => {
     const timer = setTimeout(() => setIsLoading(false), 800);
@@ -101,13 +119,13 @@ const Projects = () => {
                   {(index + 1).toString().padStart(2, "0")}
                 </div>
               ))}
-              {projects.map((_, index) => (
+              {getCurrentProjects().map((_, index) => (
                 <div key={index + codeLines.length} className="leading-6">
                   {(index + codeLines.length + 1).toString().padStart(2, "0")}
                 </div>
               ))}
               <div className="leading-6">
-                {(projects.length + codeLines.length + 1)
+                {(getCurrentProjects().length + codeLines.length + 1)
                   .toString()
                   .padStart(2, "0")}
               </div>
@@ -188,7 +206,7 @@ const Projects = () => {
               </div>{" "}
               {/* Projects Grid */}
               <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-6">
-                {projects.map((project, index) => (
+                {getCurrentProjects().map((project, index) => (
                   <motion.div
                     key={project.id}
                     initial={{ opacity: 0, y: 50 }}
@@ -208,12 +226,25 @@ const Projects = () => {
                     whileTap={{ scale: 0.98 }}
                   >
                     <Card
-                      className={`h-full group cursor-pointer transition-all duration-300 ${
+                      className={`h-full group cursor-pointer transition-all duration-300 relative ${
                         isDark
                           ? "bg-gray-800 border-gray-600 hover:border-green-400 hover:shadow-xl hover:shadow-green-400/20"
                           : "bg-white border-gray-300 hover:border-green-500 hover:shadow-xl hover:shadow-green-500/20"
                       }`}
                     >
+                      {/* Order Badge */}
+                      {project.isOrder && (
+                        <div className="absolute top-4 right-4 z-10">
+                          <div className={`px-3 py-1 rounded-full text-xs font-semibold ${
+                            isDark 
+                              ? "bg-gradient-to-r from-yellow-600 to-yellow-500 text-white" 
+                              : "bg-gradient-to-r from-yellow-500 to-yellow-400 text-white"
+                          } shadow-lg`}>
+                            ORDER
+                          </div>
+                        </div>
+                      )}
+                      
                       <div className="p-6 h-full flex flex-col">
                         {/* Project Object Header */}
                         <div className="font-mono text-sm mb-4">
@@ -353,6 +384,54 @@ const Projects = () => {
                   </motion.div>
                 ))}
               </div>
+              
+              {/* Pagination Controls */}
+              {totalPages > 1 && (
+                <div className="flex justify-center items-center space-x-4 mb-6">
+                  <button
+                    onClick={prevPage}
+                    disabled={currentPage === 0}
+                    className={`p-2 rounded-lg transition-all duration-300 ${
+                      isDark
+                        ? "bg-gray-700 text-gray-300 hover:bg-gray-600 hover:text-white disabled:bg-gray-800 disabled:text-gray-600"
+                        : "bg-gray-100 text-gray-600 hover:bg-gray-200 hover:text-gray-900 disabled:bg-gray-50 disabled:text-gray-300"
+                    } disabled:cursor-not-allowed disabled:opacity-50`}
+                  >
+                    <ChevronLeftIcon className="w-5 h-5" />
+                  </button>
+                  
+                  <div className="flex items-center space-x-2">
+                    {Array.from({ length: totalPages }, (_, i) => (
+                      <button
+                        key={i}
+                        onClick={() => setCurrentPage(i)}
+                        className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                          i === currentPage
+                            ? isDark
+                              ? "bg-green-400"
+                              : "bg-green-500"
+                            : isDark
+                            ? "bg-gray-600 hover:bg-gray-500"
+                            : "bg-gray-300 hover:bg-gray-400"
+                        }`}
+                      />
+                    ))}
+                  </div>
+                  
+                  <button
+                    onClick={nextPage}
+                    disabled={currentPage === totalPages - 1}
+                    className={`p-2 rounded-lg transition-all duration-300 ${
+                      isDark
+                        ? "bg-gray-700 text-gray-300 hover:bg-gray-600 hover:text-white disabled:bg-gray-800 disabled:text-gray-600"
+                        : "bg-gray-100 text-gray-600 hover:bg-gray-200 hover:text-gray-900 disabled:bg-gray-50 disabled:text-gray-300"
+                    } disabled:cursor-not-allowed disabled:opacity-50`}
+                  >
+                    <ChevronRightIcon className="w-5 h-5" />
+                  </button>
+                </div>
+              )}
+              
               {/* Code Footer */}
               <div
                 className={`font-mono text-sm ${
@@ -382,8 +461,8 @@ const Projects = () => {
               </div>
             </div>
             <div className="flex items-center space-x-4">
-              <span>Ln {projects.length + codeLines.length + 1}, Col 2</span>
-              <span>{projects.length} projects loaded</span>
+              <span>Ln {getCurrentProjects().length + codeLines.length + 1}, Col 2</span>
+              <span>{projects.length} projects total | Page {currentPage + 1} of {totalPages}</span>
             </div>
           </div>
         </div>

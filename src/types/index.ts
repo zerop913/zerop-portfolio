@@ -6,6 +6,7 @@ export interface Project {
   githubUrl?: string;
   liveUrl?: string;
   category: string;
+  isOrder?: boolean;
 }
 
 export interface FAQItem {
