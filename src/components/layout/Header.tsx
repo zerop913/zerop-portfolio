@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from "react";
 import { useTheme } from "@/hooks/useTheme";
+import { useLanguage } from "@/hooks/useLanguage";
+import LanguageToggle from "@/components/ui/LanguageToggle";
 
 interface HeaderProps {
   onMenuToggle?: (isOpen: boolean) => void;
@@ -11,6 +13,7 @@ export default function Header({ onMenuToggle }: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const { isDark, toggleTheme } = useTheme();
+  const { language } = useLanguage();
 
   const handleMenuToggle = () => {
     const newState = !isMenuOpen;
@@ -26,12 +29,24 @@ export default function Header({ onMenuToggle }: HeaderProps) {
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
   const navItems = [
     { href: "#hero", label: "home", file: ".tsx" },
     { href: "#projects", label: "work", file: ".json" },
     { href: "#faq", label: "info", file: ".md" },
     { href: "#contact", label: "contact", file: ".sh" },
   ];
+
+  const navDescriptions = {
+    home: language === "ru" ? "Главная страница" : "Home page",
+    work: language === "ru" ? "Портфолио проектов" : "Project portfolio",
+    info:
+      language === "ru"
+        ? "Часто задаваемые вопросы"
+        : "Frequently asked questions",
+    contact: language === "ru" ? "Связаться со мной" : "Contact me",
+  };
+
   const scrollToSection = (href: string) => {
     const element = document.querySelector(href);
     if (element) {
@@ -143,6 +158,10 @@ export default function Header({ onMenuToggle }: HeaderProps) {
               ></div>
               <span>online</span>
             </div>{" "}
+            {/* Language Toggle */}
+            <div className="hidden md:block">
+              <LanguageToggle />
+            </div>
             {/* Theme Toggle */}
             <button
               onClick={toggleTheme}
@@ -226,10 +245,11 @@ export default function Header({ onMenuToggle }: HeaderProps) {
                         isDark ? "text-gray-500" : "text-gray-400"
                       }`}
                     >
-                      {item.label === "home" && "Главная страница"}
-                      {item.label === "work" && "Портфолио проектов"}
-                      {item.label === "info" && "Часто задаваемые вопросы"}
-                      {item.label === "contact" && "Связаться со мной"}
+                      {
+                        navDescriptions[
+                          item.label as keyof typeof navDescriptions
+                        ]
+                      }
                     </span>
                   </span>
                   <span
@@ -281,7 +301,7 @@ export default function Header({ onMenuToggle }: HeaderProps) {
                       isDark ? "text-gray-500" : "text-gray-400"
                     }`}
                   >
-                    Переключить тему оформления
+                    Switch color scheme
                   </span>
                 </span>
                 <span className="flex items-center space-x-3">
@@ -291,10 +311,15 @@ export default function Header({ onMenuToggle }: HeaderProps) {
                       isDark ? "text-green-400" : "text-green-600"
                     }`}
                   >
-                    {isDark ? "темная" : "светлая"}
+                    {isDark ? "dark" : "light"}
                   </span>
                 </span>
               </button>
+
+              {/* Language Toggle Mobile */}
+              <div className="flex justify-center">
+                <LanguageToggle />
+              </div>
             </div>
           </div>
         </div>

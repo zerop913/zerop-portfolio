@@ -4,11 +4,13 @@ import { personalData } from "@/data/personal";
 import Button from "@/components/ui/Button";
 import { useClientOnly } from "@/hooks/useClientOnly";
 import { useTheme } from "@/hooks/useTheme";
+import { useLanguage } from "@/hooks/useLanguage";
 import { useState, useEffect } from "react";
 
 export default function Hero() {
   const mounted = useClientOnly();
   const { isDark } = useTheme();
+  const { language } = useLanguage();
   const [currentSkillIndex, setCurrentSkillIndex] = useState(0);
   const [displayedSkill, setDisplayedSkill] = useState("");
   const [showSkillCursor, setShowSkillCursor] = useState(true);
@@ -185,7 +187,7 @@ export default function Hero() {
                 // About
               </div>
               <div className={`${isDark ? "text-gray-200" : "text-gray-800"}`}>
-                {personalData.description}
+                {personalData.description[language]}
               </div>
             </div>
           </div>
@@ -202,7 +204,7 @@ export default function Hero() {
               size="lg"
               className="min-w-[200px]"
             >
-              Посмотреть работы
+              {language === "ru" ? "Посмотреть работы" : "View projects"}
             </Button>
             <Button
               href={personalData.telegramUrl}
@@ -211,7 +213,7 @@ export default function Hero() {
               external
               className="min-w-[200px]"
             >
-              Связаться
+              {language === "ru" ? "Связаться" : "Contact"}
             </Button>
           </div>
           {/* Scroll indicator with pulsing effect */}
@@ -233,7 +235,7 @@ export default function Hero() {
                   isDark ? "text-gray-400" : "text-gray-500"
                 }`}
               >
-                Скролл вниз
+                {language === "ru" ? "Скролл вниз" : "Scroll down"}
               </div>
             </div>
           </div>

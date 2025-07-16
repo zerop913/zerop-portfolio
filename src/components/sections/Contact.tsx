@@ -10,11 +10,13 @@ import {
 import Button from "@/components/ui/Button";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { useTheme } from "@/hooks/useTheme";
+import { useLanguage } from "@/hooks/useLanguage";
 import { useState, useEffect } from "react";
 
 export default function Contact() {
   const { ref, isVisible } = useScrollAnimation();
   const { isDark } = useTheme();
+  const { language } = useLanguage();
   const [terminalOutput, setTerminalOutput] = useState("");
   const [jsonVisible, setJsonVisible] = useState(false);
   const [finalOutput, setFinalOutput] = useState("");
@@ -221,7 +223,7 @@ export default function Contact() {
                           isDark ? "text-gray-300" : "text-gray-700"
                         }`}
                       >
-                        {personalData.name} - {personalData.title}
+                        {personalData.name} - {personalData.title[language]}
                       </div>
                     </div>
 
@@ -334,7 +336,9 @@ export default function Contact() {
               className="min-w-[280px]"
               external
             >
-              ./connect-telegram.sh
+              {language === "ru"
+                ? "./connect-telegram.sh"
+                : "./connect-telegram.sh"}
             </Button>
           </div>
 
@@ -346,8 +350,10 @@ export default function Contact() {
           >
             {" "}
             #{" "}
-            {personalData.contactNote ||
-              "Let's build something amazing together!"}
+            {personalData.contactNote[language] ||
+              (language === "ru"
+                ? "Давайте создадим что-то удивительное вместе!"
+                : "Let's build something amazing together!")}
           </div>
         </div>
       </div>

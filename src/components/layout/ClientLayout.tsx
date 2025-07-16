@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { ThemeProvider } from "@/providers/ThemeProvider";
+import { LanguageProvider } from "@/providers/LanguageProvider";
 import Header from "./Header";
 
 interface ClientLayoutProps {
@@ -13,17 +14,18 @@ export default function ClientLayout({ children }: ClientLayoutProps) {
 
   return (
     <ThemeProvider>
-      <Header onMenuToggle={setIsMobileMenuOpen} />
+      <LanguageProvider>
+        <Header onMenuToggle={setIsMobileMenuOpen} />
 
-      {/* Mobile Menu Overlay */}
-      {isMobileMenuOpen && (
-        <div
-          className="md:hidden fixed inset-0 bg-black/50 backdrop-blur-sm z-30"
-          onClick={() => setIsMobileMenuOpen(false)}
-        />
-      )}
+        {isMobileMenuOpen && (
+          <div
+            className="md:hidden fixed inset-0 bg-black/50 backdrop-blur-sm z-30"
+            onClick={() => setIsMobileMenuOpen(false)}
+          />
+        )}
 
-      {children}
+        {children}
+      </LanguageProvider>
     </ThemeProvider>
   );
 }

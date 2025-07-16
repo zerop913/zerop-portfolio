@@ -3,12 +3,14 @@
 import { faqData } from "@/data/faq";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { useTheme } from "@/hooks/useTheme";
+import { useLanguage } from "@/hooks/useLanguage";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function FAQ() {
   const { ref, isVisible } = useScrollAnimation();
   const { isDark } = useTheme();
+  const { language } = useLanguage();
   const [openItem, setOpenItem] = useState<number | null>(null);
 
   return (
@@ -81,7 +83,10 @@ export default function FAQ() {
             }`}
           >
             {" "}
-            // Ответы на часто задаваемые вопросы о разработке и сотрудничестве
+            //{" "}
+            {language === "ru"
+              ? "Ответы на часто задаваемые вопросы о разработке и сотрудничестве"
+              : "Answers to frequently asked questions about development and collaboration"}
           </p>
         </motion.div>{" "}
         {/* FAQ Items */}
@@ -135,7 +140,7 @@ export default function FAQ() {
                           isDark ? "text-green-300" : "text-green-700"
                         }`}
                       >
-                        {item.question}
+                        {item.question[language]}
                       </h3>
                     </div>{" "}
                     <motion.div
@@ -191,7 +196,9 @@ export default function FAQ() {
                           >
                             /* Answer */
                           </div>
-                          <p className="leading-relaxed">{item.answer}</p>
+                          <p className="leading-relaxed">
+                            {item.answer[language]}
+                          </p>
                         </motion.div>
                       </div>
                     </motion.div>

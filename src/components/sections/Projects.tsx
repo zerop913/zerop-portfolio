@@ -5,6 +5,7 @@ import Card from "@/components/ui/Card";
 import Button from "@/components/ui/Button";
 import { useScrollAnimation } from "@/hooks/useScrollAnimation";
 import { useTheme } from "@/hooks/useTheme";
+import { useLanguage } from "@/hooks/useLanguage";
 import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
@@ -12,22 +13,23 @@ import { ChevronLeftIcon, ChevronRightIcon } from "@heroicons/react/24/outline";
 const Projects = () => {
   const { isVisible, ref } = useScrollAnimation();
   const { isDark } = useTheme();
+  const { language } = useLanguage();
   const [activeTab, setActiveTab] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
   const [currentPage, setCurrentPage] = useState(0);
-  
+
   const projectsPerPage = 3;
   const totalPages = Math.ceil(projects.length / projectsPerPage);
-  
+
   const getCurrentProjects = () => {
     const startIndex = currentPage * projectsPerPage;
     return projects.slice(startIndex, startIndex + projectsPerPage);
   };
-  
+
   const nextPage = () => {
     setCurrentPage((prev) => (prev + 1) % totalPages);
   };
-  
+
   const prevPage = () => {
     setCurrentPage((prev) => (prev - 1 + totalPages) % totalPages);
   };
@@ -235,16 +237,18 @@ const Projects = () => {
                       {/* Order Badge */}
                       {project.isOrder && (
                         <div className="absolute top-4 right-4 z-10">
-                          <div className={`px-3 py-1 rounded-full text-xs font-semibold ${
-                            isDark 
-                              ? "bg-gradient-to-r from-yellow-600 to-yellow-500 text-white" 
-                              : "bg-gradient-to-r from-yellow-500 to-yellow-400 text-white"
-                          } shadow-lg`}>
+                          <div
+                            className={`px-3 py-1 rounded-full text-xs font-semibold ${
+                              isDark
+                                ? "bg-gradient-to-r from-yellow-600 to-yellow-500 text-white"
+                                : "bg-gradient-to-r from-yellow-500 to-yellow-400 text-white"
+                            } shadow-lg`}
+                          >
                             ORDER
                           </div>
                         </div>
                       )}
-                      
+
                       <div className="p-6 h-full flex flex-col">
                         {/* Project Object Header */}
                         <div className="font-mono text-sm mb-4">
@@ -283,7 +287,7 @@ const Projects = () => {
                                 }`}
                               >
                                 {" "}
-                                "{project.title}"
+                                "{project.title[language]}"
                               </span>
                               <span
                                 className={
@@ -302,7 +306,7 @@ const Projects = () => {
                               : "text-gray-900 group-hover:text-green-600"
                           }`}
                         >
-                          {project.title}
+                          {project.title[language]}
                         </h3>
                         <p
                           className={`${
@@ -311,7 +315,7 @@ const Projects = () => {
                             isDark ? "text-gray-100" : "text-gray-700"
                           } transition-colors duration-300`}
                         >
-                          {project.description}
+                          {project.description[language]}
                         </p>
                         {/* Technologies */}
                         <div className="mb-4">
@@ -384,7 +388,6 @@ const Projects = () => {
                   </motion.div>
                 ))}
               </div>
-              
               {/* Pagination Controls */}
               {totalPages > 1 && (
                 <div className="flex justify-center items-center space-x-4 mb-6">
@@ -399,7 +402,7 @@ const Projects = () => {
                   >
                     <ChevronLeftIcon className="w-5 h-5" />
                   </button>
-                  
+
                   <div className="flex items-center space-x-2">
                     {Array.from({ length: totalPages }, (_, i) => (
                       <button
@@ -417,7 +420,7 @@ const Projects = () => {
                       />
                     ))}
                   </div>
-                  
+
                   <button
                     onClick={nextPage}
                     disabled={currentPage === totalPages - 1}
@@ -431,7 +434,6 @@ const Projects = () => {
                   </button>
                 </div>
               )}
-              
               {/* Code Footer */}
               <div
                 className={`font-mono text-sm ${
@@ -461,8 +463,13 @@ const Projects = () => {
               </div>
             </div>
             <div className="flex items-center space-x-4">
-              <span>Ln {getCurrentProjects().length + codeLines.length + 1}, Col 2</span>
-              <span>{projects.length} projects total | Page {currentPage + 1} of {totalPages}</span>
+              <span>
+                Ln {getCurrentProjects().length + codeLines.length + 1}, Col 2
+              </span>
+              <span>
+                {projects.length} projects total | Page {currentPage + 1} of{" "}
+                {totalPages}
+              </span>
             </div>
           </div>
         </div>

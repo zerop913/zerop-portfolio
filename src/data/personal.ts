@@ -1,8 +1,13 @@
 export const personalData = {
   name: "Ivan Smolin",
-  title: "Web Developer",
-  description:
-    "Специализируюсь на веб-разработке и создании ботов. Работаю с современными технологиями для создания качественных цифровых решений.",
+  title: {
+    ru: "Web Developer",
+    en: "Web Developer",
+  },
+  description: {
+    ru: "Специализируюсь на веб-разработке и создании ботов. Работаю с современными технологиями для создания качественных цифровых решений.",
+    en: "I specialize in web development and bot creation. I work with modern technologies to create high-quality digital solutions.",
+  },
   telegramUrl: "https://t.me/zerop913",
   skills: [
     "React",
@@ -16,6 +21,8 @@ export const personalData = {
     "Bot Development",
     "Database Management",
   ],
-  contactNote:
-    "Если в перечисленных технологиях нет нужных, напишите лично для уточнения",
+  contactNote: {
+    ru: "Если в перечисленных технологиях нет нужных, напишите лично для уточнения",
+    en: "If the required technologies are not listed, please contact me personally for clarification",
+  },
 };
