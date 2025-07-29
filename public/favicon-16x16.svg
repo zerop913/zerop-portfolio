@@ -1,0 +1,20 @@
+<svg width="16" height="16" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
+  <!-- Hexagon shape -->
+  <path
+    d="M8 1 L14 4.5 L14 11.5 L8 15 L2 11.5 L2 4.5 Z"
+    fill="transparent"
+    stroke="#000000"
+    stroke-width="0.75"
+  />
+  <!-- Forward slash symbol -->
+  <text
+    x="8"
+    y="10"
+    text-anchor="middle"
+    font-family="monospace"
+    font-size="6"
+    fill="#000000"
+  >
+    /
+  </text>
+</svg>
