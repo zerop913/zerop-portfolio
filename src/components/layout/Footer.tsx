@@ -1,66 +1,80 @@
 "use client";
 
-import { useTheme } from "@/hooks/useTheme";
+import React, { useState, useEffect } from "react";
+import { personalData } from "@/data/personal";
 
-export default function Footer() {
-  const { isDark } = useTheme();
+export const Footer: React.FC = () => {
+  const [currentDate, setCurrentDate] = useState<string>("");
+  const version = "v1.0.0";
+  const uptime = "99.9%";
+
+  useEffect(() => {
+    // Форматирование текущей даты
+    const now = new Date();
+    const day = String(now.getDate()).padStart(2, "0");
+    const month = String(now.getMonth() + 1).padStart(2, "0");
+    const year = now.getFullYear();
+
+    setCurrentDate(`${day}.${month}.${year}`);
+  }, []);
 
   return (
-    <footer
-      className={`border-t py-8 transition-colors duration-300 ${
-        isDark ? "bg-black border-green-400/30" : "bg-white border-green-600/30"
-      }`}
-    >
-      <div className="container mx-auto px-4">
-        <div className="text-center">
-          {/* Terminal-style copyright */}
-          <div
-            className={`font-mono text-sm space-y-2 ${
-              isDark ? "text-green-400" : "text-green-600"
-            }`}
-          >
-            <div
-              className={`text-xs ${
-                isDark ? "text-green-300" : "text-green-700"
-              }`}
-            >
-              user@portfolio:~$ cat /sys/info/copyright.txt
+    <footer className="bg-black py-16 border-t border-gray-800">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="font-mono text-gray-500 text-sm">
+          <div className="mb-4 text-gray-400">
+            user@portfolio:~$ cat /sys/info/copyright.txt
+          </div>
+
+          <div className="space-y-2 ml-4">
+            <div className="text-gray-300">
+              © 2025 ivan.dev - All rights reserved | Build {version}
             </div>
-            <div
-              className={`text-xs ${
-                isDark ? "text-green-200" : "text-green-800"
-              }`}
-            >
-              © {new Date().getFullYear()} ivan.dev - All rights reserved |
-              Build v1.0.0
-            </div>
-            <div
-              className={`text-xs mt-2 ${
-                isDark ? "text-green-400" : "text-green-600"
-              }`}
-            >
-              [STATUS: OPERATIONAL] [UPTIME: 99.9%] [LAST_BUILD:{" "}
-              {new Date().toLocaleDateString()}]
+            <div className="flex flex-wrap gap-4 text-xs">
+              <span className="text-gray-400">[STATUS: OPERATIONAL]</span>
+              <span className="text-gray-400">[UPTIME: {uptime}]</span>
+              <span className="text-gray-400">[LAST_BUILD: {currentDate}]</span>
             </div>
           </div>
 
-          {/* Status indicator */}
-          <div className="flex justify-center items-center space-x-2 mt-4">
-            <div
-              className={`w-2 h-2 rounded-full animate-pulse ${
-                isDark ? "bg-green-400" : "bg-green-600"
-              }`}
-            ></div>
-            <span
-              className={`font-mono text-xs ${
-                isDark ? "text-green-400" : "text-green-600"
-              }`}
+          <div className="mt-8 text-gray-400">user@portfolio:~$</div>
+        </div>
+
+        <div className="flex justify-between items-center mt-12 pt-6 border-t border-gray-800">
+          <div className="flex space-x-4">
+            <a
+              href="#top"
+              className="text-gray-500 hover:text-white transition-colors duration-300 text-xs font-mono"
             >
-              SYSTEM_ONLINE
-            </span>
+              cd /home
+            </a>
+            <a
+              href="#projects"
+              className="text-gray-500 hover:text-white transition-colors duration-300 text-xs font-mono"
+            >
+              ls -la /projects
+            </a>
+            <a
+              href="#skills"
+              className="text-gray-500 hover:text-white transition-colors duration-300 text-xs font-mono"
+            >
+              cat skills.txt
+            </a>
+          </div>
+
+          <div className="text-xs text-gray-600 font-mono">
+            Design & Development -{" "}
+            <a
+              href={personalData.telegramUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-gray-400 hover:text-white transition-colors"
+            >
+              @zerop913
+            </a>
           </div>
         </div>
       </div>
     </footer>
   );
-}
+};

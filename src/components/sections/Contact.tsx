@@ -1,362 +1,250 @@
 "use client";
 
+import React, { useState } from "react";
+import { motion } from "framer-motion";
 import { personalData } from "@/data/personal";
-import {
-  terminalCommands,
-  jsonOutput,
-  finalCommands,
-  terminalConfig,
-} from "@/data/terminal";
-import Button from "@/components/ui/Button";
-import { useScrollAnimation } from "@/hooks/useScrollAnimation";
-import { useTheme } from "@/hooks/useTheme";
-import { useLanguage } from "@/hooks/useLanguage";
-import { useState, useEffect } from "react";
+import { useI18n } from "@/lib/i18n";
 
-export default function Contact() {
-  const { ref, isVisible } = useScrollAnimation();
-  const { isDark } = useTheme();
-  const { language } = useLanguage();
-  const [terminalOutput, setTerminalOutput] = useState("");
-  const [jsonVisible, setJsonVisible] = useState(false);
-  const [finalOutput, setFinalOutput] = useState("");
-  const [showCursor, setShowCursor] = useState(true);
-  const [isConnected, setIsConnected] = useState(false);
-  const [isTypingComplete, setIsTypingComplete] = useState(false);
-  const [currentPhase, setCurrentPhase] = useState<
-    "initial" | "json" | "final"
-  >("initial");
+export const ContactSection: React.FC = () => {
+  const { language } = useI18n();
+  const [copied, setCopied] = useState(false);
 
-  useEffect(() => {
-    if (!isVisible) return;
+  const handleCopy = () => {
+    navigator.clipboard.writeText(personalData.telegramUrl);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
 
-    let commandIndex = 0;
-    let charIndex = 0;
-    let currentOutput = "";
+  // Получаем московское время
+  const getMoscowTime = () => {
+    const now = new Date();
+    return new Date(
+      now.toLocaleString("en-US", {
+        timeZone: personalData.workSchedule.timezone,
+      })
+    );
+  };
 
-    const typeInitialCommands = () => {
-      const timer = setInterval(() => {
-        if (commandIndex < terminalCommands.length) {
-          const currentCommand = terminalCommands[commandIndex];
+  // Проверяем статус работы
+  const getWorkStatus = () => {
+    const moscowTime = getMoscowTime();
+    const moscowHour = moscowTime.getHours();
 
-          if (charIndex < currentCommand.length) {
-            currentOutput += currentCommand[charIndex];
-            setTerminalOutput(currentOutput);
-            charIndex++;
-          } else {
-            commandIndex++;
-            charIndex = 0;
-            currentOutput += "\n";
+    const { workStart, workEnd } = personalData.workSchedule;
 
-            if (commandIndex === terminalConfig.connectionEstablishedIndex) {
-              setIsConnected(true);
-            }
-          }
-        } else {
-          clearInterval(timer);
-          setCurrentPhase("json");
-          // После завершения ввода команды cat, показываем JSON
-          setTimeout(() => {
-            setJsonVisible(true);
-            setTimeout(() => {
-              setCurrentPhase("final");
-              typeFinalCommands();
-            }, terminalConfig.jsonAppearDelay);
-          }, terminalConfig.jsonAppearDelay);
-        }
-      }, terminalConfig.typingSpeed);
-    };
+    const isOnline = moscowHour >= workStart || moscowHour < workEnd;
 
-    const typeFinalCommands = () => {
-      let finalCommandIndex = 0;
-      let finalCharIndex = 0;
-      let finalCurrentOutput = "";
+    return { isOnline };
+  };
 
-      const finalTimer = setInterval(() => {
-        if (finalCommandIndex < finalCommands.length) {
-          const currentCommand = finalCommands[finalCommandIndex];
-
-          if (finalCharIndex < currentCommand.length) {
-            finalCurrentOutput += currentCommand[finalCharIndex];
-            setFinalOutput(finalCurrentOutput);
-            finalCharIndex++;
-          } else {
-            finalCommandIndex++;
-            finalCharIndex = 0;
-            finalCurrentOutput += "\n";
-          }
-        } else {
-          clearInterval(finalTimer);
-          setIsTypingComplete(true);
-          setShowCursor(false);
-        }
-      }, terminalConfig.typingSpeed);
-    };
-
-    const delay = setTimeout(typeInitialCommands, 1000);
-    return () => clearTimeout(delay);
-  }, [isVisible]);
-
-  useEffect(() => {
-    if (isTypingComplete) return; // Don't blink cursor after typing is complete
-
-    const cursorInterval = setInterval(() => {
-      setShowCursor((prev) => !prev);
-    }, 500);
-    return () => clearInterval(cursorInterval);
-  }, [isTypingComplete]);
+  const workStatus = getWorkStatus();
 
   return (
-    <section
-      id="contact"
-      ref={ref}
-      className={`py-20 transition-all duration-700 ${
-        isDark ? "bg-gray-900" : "bg-white"
-      } ${isVisible ? "opacity-100" : "opacity-0"}`}
-    >
-      <div className="container mx-auto px-4 max-w-6xl">
-        {/* Section Header */}
-        <div className="text-center mb-16">
-          <h2
-            className={`text-5xl md:text-7xl font-bold mb-6 font-mono ${
-              isDark ? "text-white" : "text-gray-900"
-            }`}
-          >
-            ./contact<span className="text-green-500">.sh</span>
-          </h2>
-          <p
-            className={`text-xl ${
-              isDark ? "text-gray-300" : "text-gray-600"
-            } max-w-2xl mx-auto`}
-          >
-            Готовы обсудить ваш проект?
-          </p>
-        </div>{" "}
+    <section id="contact" className="py-32 bg-black relative">
+      <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white/20 to-transparent" />
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.8 }}
+          className="mb-20"
+        >
+          <div className="flex items-end justify-between mb-8">
+            <div>
+              <span className="font-mono text-sm text-gray-500 tracking-wider uppercase">
+                06 / {language === "en" ? "Contact" : "Контакт"}
+              </span>
+              <div className="relative mt-4">
+                <h2 className="font-grotesk text-4xl sm:text-6xl font-light text-white relative z-10">
+                  {language === "en" ? "Get in touch" : "Связаться со мной"}
+                </h2>
+                <div className="absolute inset-0 font-grotesk text-4xl sm:text-6xl font-light text-white/10 blur-sm">
+                  {language === "en" ? "Get in touch" : "Связаться со мной"}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div className="w-full h-px bg-gradient-to-r from-white/20 via-white/5 to-transparent" />
+        </motion.div>
+
+        {/* Contact Content */}
         <div className="max-w-4xl mx-auto">
-          {/* Unified Terminal Window */}
-          <div
-            className={`rounded-lg shadow-xl border transition-all duration-300 ${
-              isDark ? "border-gray-700" : "border-gray-300"
-            } ${isVisible ? "scale-100 opacity-100" : "scale-95 opacity-0"}`}
+          {/* Main Content */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+            className="mb-20"
           >
-            {/* Terminal Header */}
-            <div
-              className={`${
-                isDark ? "bg-gray-700" : "bg-gray-200"
-              } rounded-t-lg px-4 py-3 flex items-center justify-between`}
-            >
-              <div className="flex items-center space-x-2">
-                <div className="w-3 h-3 rounded-full bg-red-500"></div>
-                <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
-                <div className="w-3 h-3 rounded-full bg-green-500"></div>
-                <span
-                  className={`text-sm font-mono ml-4 ${
-                    isDark ? "text-gray-300" : "text-gray-600"
-                  }`}
-                >
-                  Terminal - Contact Session
-                </span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <div
-                  className={`w-2 h-2 rounded-full ${
-                    isConnected ? "bg-green-500 animate-pulse" : "bg-yellow-500"
-                  }`}
-                ></div>
-                <span
-                  className={`text-xs ${
-                    isDark ? "text-gray-400" : "text-gray-500"
-                  }`}
-                >
-                  {isConnected ? "Connected" : "Connecting..."}
-                </span>
-              </div>
+            <h3 className="font-grotesk text-3xl font-light text-white mb-8">
+              {language === "en"
+                ? "Ready to discuss your project"
+                : "Готов обсудить ваш проект"}
+            </h3>
+            <div className="relative pl-8 mb-16">
+              <div className="absolute left-0 top-0 bottom-0 w-px bg-gradient-to-b from-gray-600 via-gray-700 to-transparent"></div>
+              <p className="text-gray-400 leading-relaxed text-lg">
+                {language === "en"
+                  ? "Contact me via Telegram to discuss details. I usually respond within an hour during working hours."
+                  : "Свяжитесь со мной через Telegram для обсуждения деталей. Обычно отвечаю в течение часа в рабочее время."}
+              </p>
             </div>
 
-            {/* Terminal Content */}
-            <div
-              className={`p-6 font-mono text-sm ${
-                isDark
-                  ? "text-green-400 bg-gray-900"
-                  : "text-green-700 bg-white"
-              } rounded-b-lg relative overflow-hidden min-h-[400px]`}
-            >
-              <div className="relative z-10">
-                {" "}
-                {/* Animated Connection Commands */}
-                <pre className="whitespace-pre-wrap">
-                  {terminalOutput}
-                  {showCursor &&
-                    !isTypingComplete &&
-                    currentPhase === "initial" && (
-                      <span
-                        className={`inline-block w-2 h-5 ${
-                          isDark ? "bg-green-400" : "bg-green-700"
-                        }`}
-                      ></span>
-                    )}
-                </pre>
-                {/* JSON Output */}
-                {jsonVisible && (
-                  <div
-                    className={`animate-fade-in mt-4 ${
-                      isDark ? "text-green-400" : "text-green-700"
-                    }`}
-                  >
-                    {jsonOutput}
-                  </div>
-                )}
-                {/* Additional Commands after JSON */}
-                {currentPhase === "final" && (
-                  <div className="mt-4">
-                    <div className="mb-4">
-                      <div
-                        className={`${
-                          isDark ? "text-green-400" : "text-green-600"
-                        }`}
-                      >
-                        <span className="opacity-60">ivan@portfolio:~$</span>{" "}
-                        <span>whoami</span>
-                      </div>
-                      <div
-                        className={`ml-4 mt-1 ${
-                          isDark ? "text-gray-300" : "text-gray-700"
-                        }`}
-                      >
-                        {personalData.name} - {personalData.title[language]}
-                      </div>
-                    </div>
-
-                    <div className="mb-4">
-                      <div
-                        className={`${
-                          isDark ? "text-green-400" : "text-green-600"
-                        }`}
-                      >
-                        <span className="opacity-60">ivan@portfolio:~$</span>{" "}
-                        <span>contact --info</span>
-                      </div>
-                      <div
-                        className={`ml-4 mt-1 space-y-1 ${
-                          isDark ? "text-gray-300" : "text-gray-700"
-                        }`}
-                      >
-                        <div className="flex items-center space-x-2">
-                          <span
-                            className={`${
-                              isDark ? "text-purple-400" : "text-purple-600"
-                            }`}
-                          >
-                            →
-                          </span>
-                          <span>Platform: Telegram</span>
-                        </div>
-                        <div className="flex items-center space-x-2">
-                          <span
-                            className={`${
-                              isDark ? "text-purple-400" : "text-purple-600"
-                            }`}
-                          >
-                            →
-                          </span>
-                          <span>Username: @zerop913</span>
-                        </div>
-                        <div className="flex items-center space-x-2">
-                          <span
-                            className={`${
-                              isDark ? "text-purple-400" : "text-purple-600"
-                            }`}
-                          >
-                            →
-                          </span>
-                          <span>Status: </span>
-                          <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-                          <span
-                            className={`${
-                              isDark ? "text-green-400" : "text-green-600"
-                            }`}
-                          >
-                            Online
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-
+            {/* Contact Methods */}
+            <div className="space-y-8">
+              {/* Telegram */}
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.3 }}
+                className="group cursor-pointer"
+              >
+                <div className="flex items-center justify-between py-6 border-b border-gray-800 group-hover:border-gray-600 transition-all duration-300">
+                  <div className="flex items-center space-x-6">
+                    <span className="font-mono text-sm text-gray-500 w-20">
+                      01
+                    </span>
                     <div>
-                      <pre className="whitespace-pre-wrap">
-                        {finalOutput}
-                        {showCursor &&
-                          !isTypingComplete &&
-                          currentPhase === "final" && (
-                            <span
-                              className={`inline-block w-2 h-5 ${
-                                isDark ? "bg-green-400" : "bg-green-700"
-                              }`}
-                            ></span>
-                          )}
-                      </pre>
+                      <span className="font-mono text-sm text-gray-500 uppercase tracking-wider block mb-1">
+                        Telegram
+                      </span>
+                      <a
+                        href={personalData.telegramUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="font-mono text-xl text-white group-hover:text-gray-300 transition-colors"
+                      >
+                        {personalData.telegramUrl.replace("https://t.me/", "@")}
+                      </a>
                     </div>
                   </div>
-                )}
-                {/* Interactive Prompt after completion */}
-                {isTypingComplete && (
-                  <div className="mt-6 space-y-4 animate-fade-in">
-                    <div
-                      className={`flex items-center space-x-2 ${
-                        isDark ? "text-green-400" : "text-green-700"
-                      }`}
-                    >
-                      <span>ivan@portfolio:~$</span>
-                      <span className="animate-pulse">_</span>
+                  <div className="flex items-center space-x-4">
+                    <div className="flex items-center space-x-2">
+                      <div
+                        className={`w-2 h-2 rounded-full ${
+                          workStatus.isOnline ? "bg-green-400" : "bg-red-400"
+                        }`}
+                      ></div>
+                      <span className="font-mono text-xs text-gray-400">
+                        {workStatus.isOnline
+                          ? language === "en"
+                            ? "Online"
+                            : "На связи"
+                          : language === "en"
+                          ? "Offline"
+                          : "Не на связи"}
+                      </span>
                     </div>
+                    <motion.div
+                      className="w-6 h-6 border border-gray-600 group-hover:border-gray-400 transition-colors flex items-center justify-center"
+                      whileHover={{ rotate: 45 }}
+                    >
+                      <span className="block w-3 h-px bg-gray-400"></span>
+                      <span className="absolute w-px h-3 bg-gray-400"></span>
+                    </motion.div>
+                  </div>
+                </div>
+              </motion.div>
 
-                    {/* Help text */}
-                    <div
-                      className={`text-xs ${
-                        isDark ? "text-gray-500" : "text-gray-400"
-                      } space-y-1`}
-                    >
-                      <div className="opacity-60"># Ready for connection</div>
-                      <div className="opacity-40">
-                        Use the button below to start conversation
-                      </div>
-                    </div>
+              {/* Actions */}
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: 0.4 }}
+                className="flex flex-col sm:flex-row gap-6 pl-26"
+              >
+                <motion.a
+                  href={personalData.telegramUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  whileHover={{ x: 10 }}
+                  className="group flex items-center space-x-4 text-white hover:text-gray-300 transition-colors"
+                >
+                  <span className="font-mono text-sm tracking-wider uppercase">
+                    {language === "en" ? "Send message" : "Написать сообщение"}
+                  </span>
+                  <div className="w-12 h-px bg-white" />
+                  <div className="w-1 h-1 bg-white rounded-full group-hover:rotate-45 group-hover:rounded-none group-hover:scale-110 transition-all duration-300" />
+                </motion.a>
+
+                <motion.button
+                  onClick={handleCopy}
+                  whileHover={{ x: 10 }}
+                  className="group flex items-center space-x-4 text-gray-400 hover:text-white transition-colors"
+                >
+                  <span className="font-mono text-sm tracking-wider uppercase">
+                    {copied
+                      ? language === "en"
+                        ? "Copied!"
+                        : "Скопировано!"
+                      : language === "en"
+                      ? "Copy username"
+                      : "Скопировать ник"}
+                  </span>
+                  <div className="w-10 h-px bg-gray-400 group-hover:bg-white transition-colors" />
+                  <div className="w-1 h-1 bg-gray-400 group-hover:bg-white rounded-full group-hover:rotate-45 group-hover:rounded-none group-hover:scale-110 transition-all duration-300" />
+                </motion.button>
+              </motion.div>
+            </div>
+          </motion.div>
+
+          {/* Additional Info */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.5 }}
+            className="border-t border-gray-800 pt-16"
+          >
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
+              <div className="group">
+                <div className="flex items-center justify-between py-4 border-b border-gray-800 group-hover:border-gray-600 transition-all duration-300">
+                  <div>
+                    <span className="font-mono text-sm text-gray-500 uppercase tracking-wider block mb-1">
+                      {language === "en" ? "Working hours" : "Рабочие часы"}
+                    </span>
+                    <span className="font-mono text-lg text-white">
+                      12:00 - 03:00 MSK
+                    </span>
                   </div>
-                )}
+                </div>
+              </div>
+
+              <div className="group">
+                <div className="flex items-center justify-between py-4 border-b border-gray-800 group-hover:border-gray-600 transition-all duration-300">
+                  <div>
+                    <span className="font-mono text-sm text-gray-500 uppercase tracking-wider block mb-1">
+                      {language === "en" ? "Response time" : "Время ответа"}
+                    </span>
+                    <span className="font-mono text-lg text-white">
+                      {language === "en" ? "~1 hour" : "~1 час"}
+                    </span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="group">
+                <div className="flex items-center justify-between py-4 border-b border-gray-800 group-hover:border-gray-600 transition-all duration-300">
+                  <div>
+                    <span className="font-mono text-sm text-gray-500 uppercase tracking-wider block mb-1">
+                      {language === "en" ? "Timezone" : "Часовой пояс"}
+                    </span>
+                    <span className="font-mono text-lg text-white">UTC+3</span>
+                  </div>
+                </div>
               </div>
             </div>
-          </div>
-
-          {/* Connect Button */}
-          <div className="mt-6 text-center">
-            <Button
-              href={personalData.telegramUrl}
-              variant="terminal"
-              size="lg"
-              className="min-w-[280px]"
-              external
-            >
-              {language === "ru"
-                ? "./connect-telegram.sh"
-                : "./connect-telegram.sh"}
-            </Button>
-          </div>
-
-          {/* Note */}
-          <div
-            className={`text-center text-sm mt-6 ${
-              isDark ? "text-gray-400" : "text-gray-500"
-            } font-mono`}
-          >
-            {" "}
-            #{" "}
-            {personalData.contactNote[language] ||
-              (language === "ru"
-                ? "Давайте создадим что-то удивительное вместе!"
-                : "Let's build something amazing together!")}
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>
   );
-}
+};
+
+export default ContactSection;

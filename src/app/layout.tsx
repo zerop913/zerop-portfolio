@@ -1,55 +1,29 @@
 import type { Metadata } from "next";
-import localFont from "next/font/local";
+import "@fontsource/inter/400.css";
+import "@fontsource/inter/500.css";
+import "@fontsource/inter/600.css";
+import "@fontsource/jetbrains-mono/400.css";
+import "@fontsource/jetbrains-mono/500.css";
+import "@fontsource/space-grotesk/300.css";
+import "@fontsource/space-grotesk/400.css";
+import "@fontsource/space-grotesk/500.css";
+import "@fontsource/space-grotesk/700.css";
 import "./globals.css";
-
-const geistSans = localFont({
-  src: "../../node_modules/geist/dist/fonts/geist-sans/Geist-Variable.woff2",
-  variable: "--font-geist-sans",
-  weight: "100 900",
-});
-
-const geistMono = localFont({
-  src: "../../node_modules/geist/dist/fonts/geist-mono/GeistMono-Variable.woff2",
-  variable: "--font-geist-mono",
-  weight: "100 900",
-});
+import { I18nProvider } from "@/lib/i18n";
 
 export const metadata: Metadata = {
-  title: "Иван Смолин - Веб-разработчик | Портфолио",
+  title: "Ivan Smolin - Web Developer",
   description:
-    "Веб-разработчик специализирующийся на React, Next.js, TypeScript. Создание сайтов, интернет-магазинов и ботов.",
+    "Специализируюсь на веб-разработке и создании ботов. Работаю с современными технологиями для создания качественных цифровых решений.",
   keywords: [
-    "веб-разработчик",
+    "Web Developer",
     "React",
     "Next.js",
     "TypeScript",
-    "JavaScript",
-    "PHP",
-    "Python",
+    "Bot Development",
   ],
-  authors: [{ name: "Иван Смолин" }],
-  openGraph: {
-    title: "Иван Смолин - Веб-разработчик",
-    description:
-      "Портфолио веб-разработчика. Создание современных веб-приложений и ботов.",
-    type: "website",
-    locale: "ru_RU",
-    images: [
-      {
-        url: "/logo.jpg",
-        width: 1200,
-        height: 630,
-        alt: "Иван Смолин - Веб-разработчик",
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "Иван Смолин - Веб-разработчик",
-    description:
-      "Портфолио веб-разработчика. Создание современных веб-приложений и ботов.",
-    images: ["/logo.jpg"],
-  },
+  authors: [{ name: "Ivan Smolin" }],
+  viewport: "width=device-width, initial-scale=1",
 };
 
 export default function RootLayout({
@@ -58,12 +32,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ru">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-        suppressHydrationWarning={true}
-      >
-        {children}
+    <html lang="ru" className="dark">
+      <body className="font-sans antialiased bg-black text-white selection:bg-white selection:text-black">
+        <I18nProvider>{children}</I18nProvider>
       </body>
     </html>
   );
