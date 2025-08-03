@@ -1,6 +1,7 @@
 "use client";
 
-import React, { createContext, useContext, useState, useEffect } from "react";
+import React, { createContext, useContext } from "react";
+import { useLocalStorage } from "./useLocalStorage";
 
 type Language = "ru" | "en";
 
@@ -8,6 +9,7 @@ interface I18nContextType {
   language: Language;
   setLanguage: (lang: Language) => void;
   t: (key: string, fallback?: string) => string;
+  isHydrated: boolean;
 }
 
 const I18nContext = createContext<I18nContextType | undefined>(undefined);
@@ -15,35 +17,17 @@ const I18nContext = createContext<I18nContextType | undefined>(undefined);
 export const I18nProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const [language, setLanguage] = useState<Language>("ru");
-  const [isClient, setIsClient] = useState(false);
-
-  useEffect(() => {
-    // Устанавливаем флаг, что мы на клиенте
-    setIsClient(true);
-
-    // Загружаем сохраненный язык из localStorage только на клиенте
-    if (typeof window !== "undefined") {
-      const savedLanguage = localStorage.getItem("language") as Language;
-      if (savedLanguage && (savedLanguage === "ru" || savedLanguage === "en")) {
-        setLanguage(savedLanguage);
-      }
-    }
-  }, []);
-
-  useEffect(() => {
-    // Сохраняем выбранный язык в localStorage только на клиенте
-    if (isClient && typeof window !== "undefined") {
-      localStorage.setItem("language", language);
-    }
-  }, [language, isClient]);
+  const [language, setLanguage, isHydrated] = useLocalStorage<Language>(
+    "language",
+    "ru"
+  );
 
   const t = (key: string, fallback?: string) => {
     return fallback || key;
   };
 
   return (
-    <I18nContext.Provider value={{ language, setLanguage, t }}>
+    <I18nContext.Provider value={{ language, setLanguage, t, isHydrated }}>
       {children}
     </I18nContext.Provider>
   );

@@ -7,8 +7,27 @@ import { useI18n, getLocalizedText } from "@/lib/i18n";
 import { useElementTracking } from "@/components/analytics/AnalyticsTracker";
 
 export const PricingSection: React.FC = () => {
-  const { language } = useI18n();
+  const { language, isHydrated } = useI18n();
   const { trackClick, trackHover, trackScroll } = useElementTracking();
+
+  // Показываем заглушку до полной гидратации
+  if (!isHydrated) {
+    return (
+      <section id="pricing" className="py-32 bg-black relative">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="animate-pulse">
+            <div className="h-8 bg-gray-800 rounded mb-4 w-1/3"></div>
+            <div className="h-4 bg-gray-800 rounded mb-8 w-2/3"></div>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              {[...Array(4)].map((_, i) => (
+                <div key={i} className="h-96 bg-gray-800 rounded"></div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+    );
+  }
 
   const formatPrice = (tier: (typeof pricingData)[0]) => {
     if (tier.price.to) {
@@ -39,7 +58,6 @@ export const PricingSection: React.FC = () => {
       setTimeout(() => {
         const hoverDuration = Date.now() - hoverStartTime;
         if (hoverDuration > 1500) {
-          // Если наводил больше 1.5 секунд
           trackHover(`pricing_${tier.id}`, hoverDuration);
         }
       }, 1500);

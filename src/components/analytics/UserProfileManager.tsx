@@ -18,8 +18,10 @@ interface UserProfile {
 
 export function UserProfileManager() {
   const [userProfile, setUserProfile] = useState<UserProfile | null>(null);
+  const [isHydrated, setIsHydrated] = useState(false);
 
   useEffect(() => {
+    setIsHydrated(true);
     initializeUserProfile();
     trackSessionStart();
     trackDeviceInfo();
