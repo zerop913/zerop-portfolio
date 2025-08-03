@@ -10,6 +10,9 @@ import "@fontsource/space-grotesk/500.css";
 import "@fontsource/space-grotesk/700.css";
 import "./globals.css";
 import { I18nProvider } from "@/lib/i18n";
+import { CookieBanner } from "@/components/ui/CookieBanner";
+import { AnalyticsTracker } from "@/components/analytics/AnalyticsTracker";
+import { UserProfileManager } from "@/components/analytics/UserProfileManager";
 
 export const metadata: Metadata = {
   title: "Ivan Smolin - Web Developer",
@@ -43,7 +46,13 @@ export default function RootLayout({
   return (
     <html lang="ru" className="dark">
       <body className="font-sans antialiased bg-black text-white selection:bg-white selection:text-black">
-        <I18nProvider>{children}</I18nProvider>
+        <I18nProvider>
+          <AnalyticsTracker>
+            <UserProfileManager />
+            {children}
+            <CookieBanner />
+          </AnalyticsTracker>
+        </I18nProvider>
       </body>
     </html>
   );

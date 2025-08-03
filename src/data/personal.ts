@@ -10,7 +10,7 @@ export const personalData = {
     ru: "Специализируюсь на веб-разработке и создании ботов. Работаю с современными технологиями для создания качественных цифровых решений.",
     en: "I specialize in web development and bot creation. I work with modern technologies to create high-quality digital solutions.",
   },
-  telegramUrl: "https://t.me/zerop913",
+  telegramUrl: process.env.NEXT_PUBLIC_TELEGRAM_URL || "https://t.me/zerop913",
   workSchedule: {
     timezone: "Europe/Moscow",
     workStart: 12,

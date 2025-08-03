@@ -6,20 +6,30 @@ import { projects, Project } from "@/data/projects";
 import { personalData } from "@/data/personal";
 import { ProjectModal } from "@/components/modals/ProjectModal";
 import { useI18n, getLocalizedText } from "@/lib/i18n";
+import { useElementTracking } from "@/components/analytics/AnalyticsTracker";
 
 export const ProjectsSection: React.FC = () => {
   const { language } = useI18n();
+  const { trackClick, trackHover } = useElementTracking();
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
   const [hoveredProject, setHoveredProject] = useState<number | null>(null);
   const [selectedProject, setSelectedProject] = useState<Project | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleProjectClick = (project: Project) => {
+    // Трекинг клика по проекту
+    trackClick("project", `project_${project.id}`, {
+      category: project.category,
+      title: project.title,
+      technologies: project.technologies,
+    });
+
     // Проверяем размер экрана - на мобильных не открываем модальное окно
     if (window.innerWidth < 1024) {
       // lg breakpoint
       // На мобильных открываем ссылку на проект, если она есть
       if (project.liveUrl) {
+        trackClick("external_link", "project_live_url", project.liveUrl);
         window.open(project.liveUrl, "_blank");
       }
       return;
@@ -28,6 +38,28 @@ export const ProjectsSection: React.FC = () => {
     // На десктопе открываем модальное окно
     setSelectedProject(project);
     setIsModalOpen(true);
+  };
+
+  const handleCategoryClick = (category: string) => {
+    trackClick("filter", `category_${category.toLowerCase()}`);
+    setSelectedCategory(category);
+  };
+
+  const handleProjectHover = (projectId: number, isEntering: boolean) => {
+    if (isEntering) {
+      setHoveredProject(projectId);
+      const hoverStartTime = Date.now();
+
+      // Устанавливаем таймер для отслеживания длительного наведения
+      setTimeout(() => {
+        if (hoveredProject === projectId) {
+          const hoverDuration = Date.now() - hoverStartTime;
+          trackHover(`project_${projectId}`, hoverDuration);
+        }
+      }, 2000);
+    } else {
+      setHoveredProject(null);
+    }
   };
 
   const closeModal = () => {
@@ -111,7 +143,7 @@ export const ProjectsSection: React.FC = () => {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              onClick={() => setSelectedCategory(category)}
+              onClick={() => handleCategoryClick(category)}
               className={`px-4 sm:px-6 py-2 sm:py-3 border font-mono text-xs sm:text-sm tracking-wider transition-all duration-300 ${
                 selectedCategory === category
                   ? "border-white text-white bg-white/5"
@@ -138,8 +170,8 @@ export const ProjectsSection: React.FC = () => {
                   delay: index * 0.05,
                   ease: "easeOut",
                 }}
-                onHoverStart={() => setHoveredProject(project.id)}
-                onHoverEnd={() => setHoveredProject(null)}
+                onHoverStart={() => handleProjectHover(project.id, true)}
+                onHoverEnd={() => handleProjectHover(project.id, false)}
                 onClick={() => handleProjectClick(project)}
                 className="group cursor-pointer flex flex-col h-full"
               >

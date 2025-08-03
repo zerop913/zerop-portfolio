@@ -1,11 +1,14 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import Link from "next/link";
 import { personalData } from "@/data/personal";
+import { useI18n } from "@/lib/i18n";
 
 export const Footer: React.FC = () => {
   const [currentDate, setCurrentDate] = useState<string>("");
-  const version = "v1.0.0";
+  const { language } = useI18n();
+  const version = "v1.2.0";
   const uptime = "99.9%";
 
   useEffect(() => {
@@ -41,25 +44,15 @@ export const Footer: React.FC = () => {
         </div>
 
         <div className="flex justify-between items-center mt-12 pt-6 border-t border-gray-800">
-          <div className="flex space-x-4">
-            <a
-              href="#top"
-              className="text-gray-500 hover:text-white transition-colors duration-300 text-xs font-mono"
+          <div className="flex space-x-6">
+            <Link
+              href="/privacy"
+              className="text-gray-500 hover:text-white transition-colors duration-300 text-sm"
             >
-              cd /home
-            </a>
-            <a
-              href="#projects"
-              className="text-gray-500 hover:text-white transition-colors duration-300 text-xs font-mono"
-            >
-              ls -la /projects
-            </a>
-            <a
-              href="#skills"
-              className="text-gray-500 hover:text-white transition-colors duration-300 text-xs font-mono"
-            >
-              cat skills.txt
-            </a>
+              {language === "ru"
+                ? "Политика конфиденциальности"
+                : "Privacy Policy"}
+            </Link>
           </div>
 
           <div className="text-xs text-gray-600 font-mono">

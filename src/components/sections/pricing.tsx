@@ -4,9 +4,11 @@ import React from "react";
 import { motion } from "framer-motion";
 import { pricingData, pricingNotes } from "@/data/pricing";
 import { useI18n, getLocalizedText } from "@/lib/i18n";
+import { useElementTracking } from "@/components/analytics/AnalyticsTracker";
 
 export const PricingSection: React.FC = () => {
   const { language } = useI18n();
+  const { trackClick, trackHover, trackScroll } = useElementTracking();
 
   const formatPrice = (tier: (typeof pricingData)[0]) => {
     if (tier.price.to) {
@@ -17,6 +19,31 @@ export const PricingSection: React.FC = () => {
     return `${
       language === "en" ? "from" : "от"
     } ${tier.price.from.toLocaleString()} ${tier.price.currency}`;
+  };
+
+  const handlePricingCardClick = (tier: (typeof pricingData)[0]) => {
+    trackClick("pricing", `pricing_${tier.id}`, {
+      priceFrom: tier.price.from,
+      priceTo: tier.price.to,
+      features: tier.features[language].length,
+      technologies: tier.technologies,
+    });
+  };
+
+  const handlePricingCardHover = (
+    tier: (typeof pricingData)[0],
+    isEntering: boolean
+  ) => {
+    if (isEntering) {
+      const hoverStartTime = Date.now();
+      setTimeout(() => {
+        const hoverDuration = Date.now() - hoverStartTime;
+        if (hoverDuration > 1500) {
+          // Если наводил больше 1.5 секунд
+          trackHover(`pricing_${tier.id}`, hoverDuration);
+        }
+      }, 1500);
+    }
   };
 
   return (
@@ -73,7 +100,10 @@ export const PricingSection: React.FC = () => {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: index * 0.1 }}
-              className={`group relative ${
+              onHoverStart={() => handlePricingCardHover(tier, true)}
+              onHoverEnd={() => handlePricingCardHover(tier, false)}
+              onClick={() => handlePricingCardClick(tier)}
+              className={`group relative cursor-pointer ${
                 tier.popular ? "lg:col-span-1" : ""
               }`}
             >

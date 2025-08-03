@@ -3,6 +3,8 @@
 import React, { useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Project } from "@/data/projects";
+import { useI18n, getLocalizedText, getLocalizedArray } from "@/lib/i18n";
+import { translations } from "@/data/translations";
 
 interface ProjectModalProps {
   project: Project | null;
@@ -15,6 +17,9 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
   isOpen,
   onClose,
 }) => {
+  const { language } = useI18n();
+  const t = (key: string) =>
+    translations[language][key] || translations.ru[key];
   useEffect(() => {
     if (isOpen) {
       document.body.style.overflow = "hidden";
@@ -62,10 +67,10 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
               <div className="flex items-end space-x-4 sm:space-x-6">
                 <div>
                   <span className="font-mono text-xs sm:text-sm text-gray-500 tracking-wider uppercase block mb-2">
-                    Детали проекта / {project.category}
+                    {t("projectDetails")} / {project.category}
                   </span>
                   <h2 className="font-grotesk text-xl sm:text-2xl lg:text-3xl font-light text-white">
-                    {project.title.ru}
+                    {getLocalizedText(project.title, language)}
                   </h2>
                 </div>
               </div>
@@ -85,13 +90,15 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
                 {/* Description */}
                 <div className="mb-12">
                   <h3 className="font-grotesk text-xl font-light text-white mb-6">
-                    О проекте
+                    {t("aboutProject")}
                   </h3>
                   <div className="relative pl-8">
                     <div className="absolute left-0 top-0 bottom-0 w-px bg-gradient-to-b from-gray-600 via-gray-700 to-transparent"></div>
                     <p className="text-gray-400 leading-relaxed">
-                      {project.detailedDescription?.ru ||
-                        project.description.ru}
+                      {getLocalizedText(
+                        project.detailedDescription || project.description,
+                        language
+                      )}
                     </p>
                   </div>
                 </div>
@@ -99,7 +106,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
                 {/* Technologies */}
                 <div className="mb-12">
                   <span className="font-mono text-sm text-gray-500 uppercase tracking-wider block mb-4">
-                    Технологии
+                    {t("technologies")}
                   </span>
                   <div className="flex flex-wrap gap-3">
                     {project.technologies.map((tech, index) => (
@@ -117,27 +124,29 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
                 {project.features && (
                   <div className="mb-12">
                     <span className="font-mono text-sm text-gray-500 uppercase tracking-wider block mb-4">
-                      Ключевые особенности
+                      {t("keyFeatures")}
                     </span>
                     <div className="space-y-4">
-                      {project.features.map((feature, index) => (
-                        <motion.div
-                          key={index}
-                          initial={{ opacity: 0, x: -20 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          transition={{ delay: index * 0.1 }}
-                          className="group"
-                        >
-                          <div className="flex items-center justify-between py-3 border-b border-gray-800 group-hover:border-gray-600 transition-all duration-300">
-                            <div className="flex items-center space-x-4">
-                              <span className="font-mono text-sm text-gray-500 w-8">
-                                {String(index + 1).padStart(2, "0")}
-                              </span>
-                              <span className="text-gray-300">{feature}</span>
+                      {getLocalizedArray(project.features, language).map(
+                        (feature, index) => (
+                          <motion.div
+                            key={index}
+                            initial={{ opacity: 0, x: -20 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ delay: index * 0.1 }}
+                            className="group"
+                          >
+                            <div className="flex items-center justify-between py-3 border-b border-gray-800 group-hover:border-gray-600 transition-all duration-300">
+                              <div className="flex items-center space-x-4">
+                                <span className="font-mono text-sm text-gray-500 w-8">
+                                  {String(index + 1).padStart(2, "0")}
+                                </span>
+                                <span className="text-gray-300">{feature}</span>
+                              </div>
                             </div>
-                          </div>
-                        </motion.div>
-                      ))}
+                          </motion.div>
+                        )
+                      )}
                     </div>
                   </div>
                 )}
@@ -148,9 +157,11 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
                     <div className="group">
                       <div className="py-4 border-b border-gray-800 group-hover:border-gray-600 transition-all duration-300">
                         <span className="font-mono text-sm text-gray-500 uppercase tracking-wider block mb-2">
-                          Время
+                          {t("timeline")}
                         </span>
-                        <span className="text-white">{project.timeline}</span>
+                        <span className="text-white">
+                          {getLocalizedText(project.timeline, language)}
+                        </span>
                       </div>
                     </div>
                   )}
@@ -158,21 +169,23 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
                     <div className="group">
                       <div className="py-4 border-b border-gray-800 group-hover:border-gray-600 transition-all duration-300">
                         <span className="font-mono text-sm text-gray-500 uppercase tracking-wider block mb-2">
-                          Роль
+                          {t("role")}
                         </span>
-                        <span className="text-white">{project.role}</span>
+                        <span className="text-white">
+                          {getLocalizedText(project.role, language)}
+                        </span>
                       </div>
                     </div>
                   )}
                   <div className="group">
                     <div className="py-4 border-b border-gray-800 group-hover:border-gray-600 transition-all duration-300">
                       <span className="font-mono text-sm text-gray-500 uppercase tracking-wider block mb-2">
-                        Тип проекта
+                        {t("projectType")}
                       </span>
                       <span className="text-white">
                         {project.isOrder
-                          ? "Коммерческий заказ"
-                          : "Личный проект"}
+                          ? t("commercialOrder")
+                          : t("personalProject")}
                       </span>
                     </div>
                   </div>
@@ -182,17 +195,22 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
                 {project.results && (
                   <div className="mb-12">
                     <span className="font-mono text-sm text-gray-500 uppercase tracking-wider block mb-4">
-                      Результаты
+                      {t("results")}
                     </span>
                     <div className="space-y-3">
-                      {project.results.map((result, index) => (
-                        <div key={index} className="flex items-start space-x-4">
-                          <div className="w-2 h-2 bg-white rounded-full mt-2 flex-shrink-0" />
-                          <span className="text-gray-300 leading-relaxed">
-                            {result}
-                          </span>
-                        </div>
-                      ))}
+                      {getLocalizedArray(project.results, language).map(
+                        (result, index) => (
+                          <div
+                            key={index}
+                            className="flex items-start space-x-4"
+                          >
+                            <div className="w-2 h-2 bg-white rounded-full mt-2 flex-shrink-0" />
+                            <span className="text-gray-300 leading-relaxed">
+                              {result}
+                            </span>
+                          </div>
+                        )
+                      )}
                     </div>
                   </div>
                 )}
@@ -208,7 +226,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
                       className="group flex items-center space-x-4 text-white hover:text-gray-300 transition-colors"
                     >
                       <span className="font-mono text-sm tracking-wider uppercase">
-                        Открыть сайт
+                        {t("openWebsite")}
                       </span>
                       <div className="w-12 h-px bg-white" />
                       <div className="w-1 h-1 bg-white rounded-full group-hover:rotate-45 group-hover:rounded-none group-hover:scale-110 transition-all duration-300" />
@@ -223,7 +241,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
                       className="group flex items-center space-x-4 text-gray-400 hover:text-white transition-colors"
                     >
                       <span className="font-mono text-sm tracking-wider uppercase">
-                        Исходный код
+                        {t("sourceCode")}
                       </span>
                       <div className="w-12 h-px bg-gray-400 group-hover:bg-white transition-colors" />
                       <div className="w-1 h-1 bg-gray-400 group-hover:bg-white rounded-full group-hover:rotate-45 group-hover:rounded-none group-hover:scale-110 transition-all duration-300" />
@@ -237,7 +255,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
                 {/* Preview Header */}
                 <div className="mb-4 sm:mb-6">
                   <span className="font-mono text-xs sm:text-sm text-gray-500 uppercase tracking-wider">
-                    Предпросмотр
+                    {t("preview")}
                   </span>
                 </div>
 
@@ -247,7 +265,10 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
                     <iframe
                       src={project.liveUrl}
                       className="w-full h-full"
-                      title={`Preview of ${project.title.ru}`}
+                      title={`Preview of ${getLocalizedText(
+                        project.title,
+                        language
+                      )}`}
                       loading="lazy"
                       sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
                     />
@@ -261,7 +282,7 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
                         </span>
                       </div>
                       <p className="text-gray-500 font-mono text-xs sm:text-sm">
-                        Предпросмотр недоступен
+                        {t("previewUnavailable")}
                       </p>
                     </div>
                   </div>

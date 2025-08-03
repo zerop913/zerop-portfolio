@@ -30,10 +30,7 @@ export const I18nProvider: React.FC<{ children: React.ReactNode }> = ({
     localStorage.setItem("language", language);
   }, [language]);
 
-  // Простая функция перевода для прямых текстов
   const t = (key: string, fallback?: string) => {
-    // Эта функция пока что просто возвращает ключ или fallback
-    // В будущем можно расширить для более сложных переводов
     return fallback || key;
   };
 
@@ -58,4 +55,12 @@ export const getLocalizedText = (
   language: Language
 ): string => {
   return textObj[language] || textObj.ru;
+};
+
+// Хелпер функция для получения локализованного массива из объектов с ru/en
+export const getLocalizedArray = (
+  arrayObj: { ru: string[]; en: string[] },
+  language: Language
+): string[] => {
+  return arrayObj[language] || arrayObj.ru;
 };
