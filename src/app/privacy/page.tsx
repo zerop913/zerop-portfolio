@@ -101,9 +101,7 @@ export default function PrivacyPolicyPage() {
           {renderSection(data.cookies.title, data.cookies.content)}
           {renderSection(data.dataSharing.title, data.dataSharing.content)}
           {renderSection(data.dataSecurity.title, data.dataSecurity.content)}
-          {renderSection(data.userRights.title, data.userRights.content)}
           {renderSection(data.dataRetention.title, data.dataRetention.content)}
-          {renderSection(data.minors.title, data.minors.content)}
           {renderSection(data.changes.title, data.changes.content)}
           {renderSection(data.contact.title, data.contact.content)}
         </motion.div>

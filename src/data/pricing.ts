@@ -114,7 +114,7 @@ export const pricingData: PricingTier[] = [
         "Documentation",
       ],
     },
-    technologies: ["Next.js", "TypeScript", "PostgreSQL", "Prisma", "tRPC"],
+    technologies: ["Next.js", "TypeScript", "PostgreSQL", "Python", "FastAPI"],
     timeline: {
       ru: "3-8 недель",
       en: "3-8 weeks",
@@ -200,7 +200,7 @@ export const pricingData: PricingTier[] = [
         "Technical support",
       ],
     },
-    technologies: ["Next.js", "React", "Node.js", "TypeScript"],
+    technologies: ["React", "Vue.js", "Node.js", "Python"],
     timeline: {
       ru: "Постоянно",
       en: "Ongoing",
@@ -214,8 +214,8 @@ export const pricingData: PricingTier[] = [
 
 export const pricingNotes = {
   disclaimer: {
-    ru: "Все цены являются примерными и обсуждаются индивидуально",
-    en: "All prices are approximate and discussed individually",
+    ru: "Все цены и технологии являются примерными и обсуждаются индивидуально",
+    en: "All prices and technologies are approximate and discussed individually",
   },
   consultation: {
     ru: "Обсуждение проекта — бесплатно",
