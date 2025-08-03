@@ -16,19 +16,27 @@ export const I18nProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const [language, setLanguage] = useState<Language>("ru");
+  const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
-    // Загружаем сохраненный язык из localStorage
-    const savedLanguage = localStorage.getItem("language") as Language;
-    if (savedLanguage && (savedLanguage === "ru" || savedLanguage === "en")) {
-      setLanguage(savedLanguage);
+    // Устанавливаем флаг, что мы на клиенте
+    setIsClient(true);
+
+    // Загружаем сохраненный язык из localStorage только на клиенте
+    if (typeof window !== "undefined") {
+      const savedLanguage = localStorage.getItem("language") as Language;
+      if (savedLanguage && (savedLanguage === "ru" || savedLanguage === "en")) {
+        setLanguage(savedLanguage);
+      }
     }
   }, []);
 
   useEffect(() => {
-    // Сохраняем выбранный язык в localStorage
-    localStorage.setItem("language", language);
-  }, [language]);
+    // Сохраняем выбранный язык в localStorage только на клиенте
+    if (isClient && typeof window !== "undefined") {
+      localStorage.setItem("language", language);
+    }
+  }, [language, isClient]);
 
   const t = (key: string, fallback?: string) => {
     return fallback || key;

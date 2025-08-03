@@ -83,11 +83,14 @@ export const trackUserInterest = (interest: string, context?: string) => {
     timestamp: Date.now(),
   });
 
-  const existingInterests = JSON.parse(
-    localStorage.getItem("user_interests") || "[]"
-  );
-  const newInterests = Array.from(new Set([...existingInterests, interest]));
-  localStorage.setItem("user_interests", JSON.stringify(newInterests));
+  // Проверяем, что мы на клиенте
+  if (typeof window !== "undefined") {
+    const existingInterests = JSON.parse(
+      localStorage.getItem("user_interests") || "[]"
+    );
+    const newInterests = Array.from(new Set([...existingInterests, interest]));
+    localStorage.setItem("user_interests", JSON.stringify(newInterests));
+  }
 };
 
 export const trackUserAction = (
@@ -121,14 +124,17 @@ export const trackUserAction = (
     path: typeof window !== "undefined" ? window.location.pathname : "",
   };
 
-  const actions = JSON.parse(localStorage.getItem("user_actions") || "[]");
-  actions.push(actionData);
+  // Проверяем, что мы на клиенте
+  if (typeof window !== "undefined") {
+    const actions = JSON.parse(localStorage.getItem("user_actions") || "[]");
+    actions.push(actionData);
 
-  if (actions.length > 100) {
-    actions.shift();
+    if (actions.length > 100) {
+      actions.shift();
+    }
+
+    localStorage.setItem("user_actions", JSON.stringify(actions));
   }
-
-  localStorage.setItem("user_actions", JSON.stringify(actions));
 };
 
 export const trackPageView = (path: string, title?: string) => {
@@ -201,6 +207,16 @@ export const useCookieConsent = () => {
 };
 
 export const getUserAnalyticsData = () => {
+  // Проверяем, что мы на клиенте
+  if (typeof window === "undefined") {
+    return {
+      interests: [],
+      engagementLevel: "low",
+      preferredSections: {},
+      sessionData: { totalSessions: 0, averageTime: 0, bounceRate: 0 },
+    };
+  }
+
   const interests = JSON.parse(localStorage.getItem("user_interests") || "[]");
   const actions = JSON.parse(localStorage.getItem("user_actions") || "[]");
 

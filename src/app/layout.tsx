@@ -48,8 +48,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ru" className="dark">
-      <body className="font-sans antialiased bg-black text-white selection:bg-white selection:text-black">
+    <html lang="ru" className="dark" suppressHydrationWarning>
+      <body
+        className="font-sans antialiased bg-black text-white selection:bg-white selection:text-black"
+        suppressHydrationWarning
+      >
         <I18nProvider>
           <AnalyticsTracker>
             <UserProfileManager />

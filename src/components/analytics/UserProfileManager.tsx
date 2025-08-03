@@ -61,6 +61,9 @@ export function UserProfileManager() {
   }, []);
 
   const initializeUserProfile = () => {
+    // Проверяем, что мы на клиенте
+    if (typeof window === "undefined") return;
+
     const saved = localStorage.getItem("user_profile");
     const existing = saved ? JSON.parse(saved) : null;
 
@@ -78,7 +81,9 @@ export function UserProfileManager() {
     };
 
     setUserProfile(profile);
-    localStorage.setItem("user_profile", JSON.stringify(profile));
+    if (typeof window !== "undefined") {
+      localStorage.setItem("user_profile", JSON.stringify(profile));
+    }
   };
 
   const trackSessionStart = () => {
@@ -127,7 +132,9 @@ export function UserProfileManager() {
           utmCampaign: utmCampaign || userProfile.utmCampaign,
         };
         setUserProfile(updatedProfile);
-        localStorage.setItem("user_profile", JSON.stringify(updatedProfile));
+        if (typeof window !== "undefined") {
+          localStorage.setItem("user_profile", JSON.stringify(updatedProfile));
+        }
       }
     }
   };
@@ -139,11 +146,14 @@ export function UserProfileManager() {
         totalTimeSpent: userProfile.totalTimeSpent + sessionDuration,
       };
       setUserProfile(updatedProfile);
-      localStorage.setItem("user_profile", JSON.stringify(updatedProfile));
+      if (typeof window !== "undefined") {
+        localStorage.setItem("user_profile", JSON.stringify(updatedProfile));
+      }
     }
   };
 
   const getDeviceType = (): "mobile" | "tablet" | "desktop" => {
+    if (typeof window === "undefined") return "desktop";
     const width = window.innerWidth;
     if (width < 768) return "mobile";
     if (width < 1024) return "tablet";
@@ -152,7 +162,7 @@ export function UserProfileManager() {
 
   // Экспорт профиля для Яндекс.Метрики
   const exportForYandexMetrica = () => {
-    if (!userProfile) return null;
+    if (!userProfile || typeof window === "undefined") return null;
 
     const interests = JSON.parse(
       localStorage.getItem("user_interests") || "[]"
