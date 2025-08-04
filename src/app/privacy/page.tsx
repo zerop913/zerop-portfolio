@@ -12,11 +12,8 @@ export default function PrivacyPolicyPage() {
   const data = privacyPolicyData[language];
 
   useEffect(() => {
-    // Обновляем заголовок страницы в зависимости от языка
     document.title =
-      language === "ru"
-        ? "Политика конфиденциальности | Ivan Smolin"
-        : "Privacy Policy | Ivan Smolin";
+      language === "ru" ? "Политика конфиденциальности" : "Privacy Policy";
   }, [language]);
 
   // Функция для форматирования текста с markdown

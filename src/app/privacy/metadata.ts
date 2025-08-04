@@ -1,7 +1,7 @@
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Политика конфиденциальности | Ivan Smolin",
+  title: "Политика конфиденциальности",
   description:
     "Политика конфиденциальности сайта Ivan Smolin. Информация о сборе, использовании и защите персональных данных пользователей.",
   keywords: [
@@ -13,7 +13,7 @@ export const metadata: Metadata = {
     "веб-разработка",
   ],
   openGraph: {
-    title: "Политика конфиденциальности | Ivan Smolin",
+    title: "Политика конфиденциальности",
     description:
       "Подробная информация о том, как мы собираем, используем и защищаем ваши персональные данные.",
     type: "website",
