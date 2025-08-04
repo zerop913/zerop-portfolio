@@ -49,7 +49,7 @@ export const privacyPolicyData = {
       content: `По вопросам конфиденциальности:
 
 **Иван Смолин**
-Email: <a href="mailto:contact@ivan-smolin.ru" class="text-white/90 underline hover:text-white transition-colors">contact@ivan-smolin.ru</a>
+Email: <a href="mailto:info@ivan-smolin.ru" class="text-white/90 underline hover:text-white transition-colors">info@ivan-smolin.ru</a>
 Telegram: <a href="https://t.me/zerop913" target="_blank" rel="noopener noreferrer" class="text-white/90 underline hover:text-white transition-colors">@zerop913</a>
 Сайт: <a href="https://ivan-smolin.ru" target="_blank" rel="noopener noreferrer" class="text-white/90 underline hover:text-white transition-colors">ivan-smolin.ru</a>`,
     },
@@ -104,7 +104,7 @@ Continued use of the site means agreement to the updated policy.`,
       content: `For privacy questions:
 
 **Ivan Smolin**
-Email: <a href="mailto:contact@ivan-smolin.ru" class="text-white/90 underline hover:text-white transition-colors">contact@ivan-smolin.ru</a>
+Email: <a href="mailto:info@ivan-smolin.ru" class="text-white/90 underline hover:text-white transition-colors">info@ivan-smolin.ru</a>
 Telegram: <a href="https://t.me/zerop913" target="_blank" rel="noopener noreferrer" class="text-white/90 underline hover:text-white transition-colors">@zerop913</a>
 Website: <a href="https://ivan-smolin.ru" target="_blank" rel="noopener noreferrer" class="text-white/90 underline hover:text-white transition-colors">ivan-smolin.ru</a>`,
     },
