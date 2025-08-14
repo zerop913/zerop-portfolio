@@ -1,7 +1,7 @@
 export const privacyPolicyData = {
   ru: {
     title: "Политика конфиденциальности",
-    lastUpdated: "Последнее обновление: 6 августа 2025 г.",
+    lastUpdated: "Последнее обновление: 14 августа 2025 г.",
     introduction: {
       title: "Введение",
       content: `Данная политика описывает принципы сбора и использования информации на сайте ivan-smolin.ru. Сайт является статическим и не имеет серверной части, что минимизирует сбор персональных данных.
@@ -49,7 +49,7 @@ export const privacyPolicyData = {
       content: `По вопросам конфиденциальности и работоспособности сайта вы можете связаться с нами по электронной почте:
 
 **Иван Смолин**
-Email: <a href="mailto:ivansmolin913@yandex.ru" class="text-white/90 underline hover:text-white transition-colors">ivansmolin913@yandex.ru</a>`,
+Email: <a href="mailto:support@ivan-smolin.ru" class="text-white/90 underline hover:text-white transition-colors">support@ivan-smolin.ru</a>`,
     },
   },
   en: {
@@ -102,7 +102,7 @@ Continued use of the site means agreement to the updated policy.`,
       content: `For privacy and website functionality inquiries, you can contact us via email:
 
 **Ivan Smolin**
-Email: <a href="mailto:ivansmolin913@yandex.ru" class="text-white/90 underline hover:text-white transition-colors">ivansmolin913@yandex.ru</a>`,
+Email: <a href="mailto:support@ivan-smolin.ru" class="text-white/90 underline hover:text-white transition-colors">support@ivan-smolin.ru</a>`,
     },
   },
 };
