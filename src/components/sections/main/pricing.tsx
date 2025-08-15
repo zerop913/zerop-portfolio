@@ -2,7 +2,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { pricingData, pricingNotes } from "@/data/pricing";
+import { pricingData, pricingNotes } from "@/data/main/pricing";
 import { useI18n, getLocalizedText } from "@/lib/i18n";
 import { useElementTracking } from "@/components/analytics/AnalyticsTracker";
 

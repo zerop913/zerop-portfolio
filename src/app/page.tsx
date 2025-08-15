@@ -1,11 +1,11 @@
 import { Header } from "@/components/layout/header";
 import { Footer } from "@/components/layout/footer";
-import { HeroSection } from "@/components/sections/hero";
-import { SkillsGrid } from "@/components/sections/skills";
-import { ProjectsSection } from "@/components/sections/projects";
-import { FaqSection } from "@/components/sections/faq";
-import { PricingSection } from "@/components/sections/pricing";
-import { ContactSection } from "@/components/sections/contact";
+import { HeroSection } from "@/components/sections/main/hero";
+import { SkillsGrid } from "@/components/sections/main/skills";
+import { ProjectsSection } from "@/components/sections/main/projects";
+import { FaqSection } from "@/components/sections/main/faq";
+import { PricingSection } from "@/components/sections/main/pricing";
+import { ContactSection } from "@/components/sections/main/contact";
 import { ScrollTracker } from "@/components/analytics/ScrollTracker";
 
 export default function Home() {

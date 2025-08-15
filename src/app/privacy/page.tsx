@@ -1,7 +1,7 @@
 "use client";
 
 import { useI18n } from "@/lib/i18n";
-import { privacyPolicyData } from "@/data/privacy";
+import { privacyPolicyData } from "@/data/common/privacy";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";

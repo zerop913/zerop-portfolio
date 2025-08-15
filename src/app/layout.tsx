@@ -10,6 +10,7 @@ import "@fontsource/space-grotesk/500.css";
 import "@fontsource/space-grotesk/700.css";
 import "./globals.css";
 import { I18nProvider } from "@/lib/i18n";
+import { AuthProvider } from "@/lib/auth/AuthContext";
 import { CookieBanner } from "@/components/ui/CookieBanner";
 import { AnalyticsTracker } from "@/components/analytics/AnalyticsTracker";
 import { UserProfileManager } from "@/components/analytics/UserProfileManager";
@@ -66,11 +67,13 @@ export default function RootLayout({
         suppressHydrationWarning
       >
         <I18nProvider>
-          <AnalyticsTracker>
-            <UserProfileManager />
-            {children}
-            <CookieBanner />
-          </AnalyticsTracker>
+          <AuthProvider>
+            <AnalyticsTracker>
+              <UserProfileManager />
+              {children}
+              <CookieBanner />
+            </AnalyticsTracker>
+          </AuthProvider>
         </I18nProvider>
       </body>
     </html>

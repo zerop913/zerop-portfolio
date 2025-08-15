@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { personalData } from "@/data/personal";
+import { personalData } from "@/data/common/personal";
 import { useI18n, getLocalizedText } from "@/lib/i18n";
 import { LanguageSwitcher } from "@/components/ui/LanguageSwitcher";
 

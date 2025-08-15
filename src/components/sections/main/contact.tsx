@@ -2,7 +2,7 @@
 
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { personalData } from "@/data/personal";
+import { personalData } from "@/data/common/personal";
 import { useI18n } from "@/lib/i18n";
 
 export const ContactSection: React.FC = () => {

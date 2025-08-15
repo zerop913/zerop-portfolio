@@ -2,8 +2,8 @@
 
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { faqData } from "@/data/faq";
-import { personalData } from "@/data/personal";
+import { faqData } from "@/data/main/faq";
+import { personalData } from "@/data/common/personal";
 import { useI18n, getLocalizedText } from "@/lib/i18n";
 
 export const FaqSection: React.FC = () => {

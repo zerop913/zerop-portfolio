@@ -2,9 +2,9 @@
 
 import React, { useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Project } from "@/data/projects";
+import { Project } from "@/data/main/projects";
 import { useI18n, getLocalizedText, getLocalizedArray } from "@/lib/i18n";
-import { translations } from "@/data/translations";
+import { translations } from "@/data/common/translations";
 
 interface ProjectModalProps {
   project: Project | null;

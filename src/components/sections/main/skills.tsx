@@ -2,8 +2,8 @@
 
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { personalData } from "@/data/personal";
-import { skillsData } from "@/data/skills";
+import { personalData } from "@/data/common/personal";
+import { skillsData } from "@/data/main/skills";
 import { useI18n } from "@/lib/i18n";
 
 export const SkillsGrid: React.FC = () => {

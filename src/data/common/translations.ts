@@ -43,6 +43,16 @@ export const translations: Translations = {
     saveSettings: "Сохранить настройки",
     cancel: "Отмена",
     settingsTitle: "Настройки файлов cookie",
+
+    // 404 Page
+    notFoundTitle: "Страница не найдена",
+    notFoundDescription:
+      "Запрашиваемая страница не существует или была перемещена.",
+    notFoundHint: "Проверьте правильность введённого адреса.",
+    backButton: "Назад",
+    homeButton: "Главная",
+    errorCode: "ERROR 404",
+    notFoundStatus: "Not Found",
   },
   en: {
     projectDetails: "Project Details",
@@ -77,5 +87,14 @@ export const translations: Translations = {
     saveSettings: "Save Settings",
     cancel: "Cancel",
     settingsTitle: "Cookie Settings",
+
+    // 404 Page
+    notFoundTitle: "Page Not Found",
+    notFoundDescription: "The requested page does not exist or has been moved.",
+    notFoundHint: "Please check the entered address for correctness.",
+    backButton: "Back",
+    homeButton: "Home",
+    errorCode: "ERROR 404",
+    notFoundStatus: "Not Found",
   },
 };

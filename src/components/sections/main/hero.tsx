@@ -2,8 +2,8 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { personalData } from "@/data/personal";
-import { getTopSkills } from "@/data/skills";
+import { personalData } from "@/data/common/personal";
+import { getTopSkills } from "@/data/main/skills";
 import { useI18n, getLocalizedText } from "@/lib/i18n";
 
 export const HeroSection: React.FC = () => {

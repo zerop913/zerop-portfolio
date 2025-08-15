@@ -1,4 +1,4 @@
-import { getAllSkills } from "./skills";
+import { getAllSkills } from "@/data/main/skills";
 
 export const personalData = {
   name: "Ivan Smolin",

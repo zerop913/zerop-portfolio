@@ -2,6 +2,7 @@
 
 import React, { createContext, useContext } from "react";
 import { useLocalStorage } from "./useLocalStorage";
+import { translations } from "@/data/common/translations";
 
 type Language = "ru" | "en";
 
@@ -23,7 +24,9 @@ export const I18nProvider: React.FC<{ children: React.ReactNode }> = ({
   );
 
   const t = (key: string, fallback?: string) => {
-    return fallback || key;
+    return (
+      translations[language]?.[key] || translations.ru?.[key] || fallback || key
+    );
   };
 
   return (

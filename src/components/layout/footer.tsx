@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
-import { personalData } from "@/data/personal";
+import { personalData } from "@/data/common/personal";
 import { useI18n } from "@/lib/i18n";
 
 export const Footer: React.FC = () => {

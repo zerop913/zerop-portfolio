@@ -2,8 +2,8 @@
 
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { projects, Project } from "@/data/projects";
-import { personalData } from "@/data/personal";
+import { projects, Project } from "@/data/main/projects";
+import { personalData } from "@/data/common/personal";
 import { ProjectModal } from "@/components/modals/ProjectModal";
 import { useI18n, getLocalizedText } from "@/lib/i18n";
 import { useElementTracking } from "@/components/analytics/AnalyticsTracker";

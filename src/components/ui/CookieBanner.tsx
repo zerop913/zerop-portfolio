@@ -6,7 +6,7 @@ import { X, Settings } from "lucide-react";
 import Link from "next/link";
 import { useCookieConsent, CookieConsent } from "@/lib/analytics";
 import { useI18n } from "@/lib/i18n";
-import { translations } from "@/data/translations";
+import { translations } from "@/data/common/translations";
 
 export function CookieBanner() {
   const { consent, showBanner, updateConsent, acceptAll, declineAll } =
