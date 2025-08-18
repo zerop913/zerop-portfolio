@@ -8,7 +8,7 @@ import { useI18n } from "@/lib/i18n";
 export const Footer: React.FC = () => {
   const [currentDate, setCurrentDate] = useState<string>("");
   const { language } = useI18n();
-  const version = "v1.2.0";
+  const version = "v1.5.0";
   const uptime = "99.9%";
 
   useEffect(() => {
@@ -44,7 +44,7 @@ export const Footer: React.FC = () => {
         </div>
 
         <div className="flex justify-between items-center mt-12 pt-6 border-t border-gray-800">
-          <div className="flex space-x-6">
+          <div className="flex flex-wrap space-x-6">
             <Link
               href="/privacy"
               className="text-gray-500 hover:text-white transition-colors duration-300 text-sm"
@@ -52,6 +52,26 @@ export const Footer: React.FC = () => {
               {language === "ru"
                 ? "Политика конфиденциальности"
                 : "Privacy Policy"}
+            </Link>
+            <Link
+              href="/terms"
+              className="text-gray-500 hover:text-white transition-colors duration-300 text-sm"
+            >
+              {language === "ru"
+                ? "Пользовательское соглашение"
+                : "Terms of Service"}
+            </Link>
+            <Link
+              href="/offer"
+              className="text-gray-500 hover:text-white transition-colors duration-300 text-sm"
+            >
+              {language === "ru" ? "Договор-оферта" : "Offer Agreement"}
+            </Link>
+            <Link
+              href="/legal-info"
+              className="text-gray-500 hover:text-white transition-colors duration-300 text-sm"
+            >
+              {language === "ru" ? "Правовая информация" : "Legal Information"}
             </Link>
           </div>
 

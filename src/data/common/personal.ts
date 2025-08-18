@@ -11,6 +11,7 @@ export const personalData = {
     en: "I specialize in web development and bot creation. I work with modern technologies to create high-quality digital solutions.",
   },
   telegramUrl: process.env.NEXT_PUBLIC_TELEGRAM_URL || "https://t.me/zerop913",
+  commercialEmail: "projects@ivan-smolin.ru",
   workSchedule: {
     timezone: "Europe/Moscow",
     workStart: 12,
@@ -32,6 +33,10 @@ export const personalData = {
       sendMessage: {
         ru: "→ Написать в любом случае",
         en: "→ Send message anyway",
+      },
+      commercialProject: {
+        ru: "Коммерческий проект",
+        en: "Commercial project",
       },
     },
   },

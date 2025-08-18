@@ -40,18 +40,3 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# Authentication and Registration (temporary exclusion)
-/src/app/api/
-/src/app/login/
-/src/app/register/
-/src/components/sections/auth/
-/src/components/modals/PasswordRequirementsModal.tsx
-/src/components/ui/PasswordStrength.tsx
-/src/data/auth/
-/src/lib/auth/
-/src/middleware.ts
-/drizzle.config.ts
-/drizzle/
-/src/lib/db/
-/src/lib/auth/
-

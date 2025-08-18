@@ -1,19 +1,19 @@
 "use client";
 
 import { useI18n } from "@/lib/i18n";
-import { privacyPolicyData } from "@/data/common/privacy";
+import { legalInfoData } from "@/data/common/legal-info";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { ArrowLeft } from "lucide-react";
 import { useEffect } from "react";
 
-export default function PrivacyPolicyPage() {
+export default function LegalInfoPage() {
   const { language } = useI18n();
-  const data = privacyPolicyData[language];
+  const data = legalInfoData[language as keyof typeof legalInfoData];
 
   useEffect(() => {
     document.title =
-      language === "ru" ? "Политика конфиденциальности" : "Privacy Policy";
+      language === "ru" ? "Правовая информация" : "Legal Information";
   }, [language]);
 
   // Функция для форматирования текста с markdown
@@ -88,28 +88,15 @@ export default function PrivacyPolicyPage() {
           animate="animate"
           className="space-y-12"
         >
-          {renderSection(data.introduction.title, data.introduction.content)}
           {renderSection(
-            data.dataCollection.title,
-            data.dataCollection.content
+            data.businessStatus.title,
+            data.businessStatus.content
           )}
-          {renderSection(data.dataUsage.title, data.dataUsage.content)}
-          {renderSection(data.analytics.title, data.analytics.content)}
-          {renderSection(data.cookies.title, data.cookies.content)}
-          {renderSection(data.dataSharing.title, data.dataSharing.content)}
-          {renderSection(data.dataSecurity.title, data.dataSecurity.content)}
-          {renderSection(data.dataRetention.title, data.dataRetention.content)}
-          {renderSection(data.changes.title, data.changes.content)}
-          {data.legalBasis &&
-            renderSection(data.legalBasis.title, data.legalBasis.content)}
+          {renderSection(data.taxation.title, data.taxation.content)}
+          {renderSection(data.geography.title, data.geography.content)}
+          {renderSection(data.guarantees.title, data.guarantees.content)}
+          {renderSection(data.documents.title, data.documents.content)}
           {renderSection(data.contact.title, data.contact.content)}
-          {data.complaints &&
-            renderSection(data.complaints.title, data.complaints.content)}
-          {data.finalProvisions &&
-            renderSection(
-              data.finalProvisions.title,
-              data.finalProvisions.content
-            )}
         </motion.div>
 
         {/* Footer */}

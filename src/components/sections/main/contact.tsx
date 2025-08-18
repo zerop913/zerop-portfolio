@@ -4,10 +4,12 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { personalData } from "@/data/common/personal";
 import { useI18n } from "@/lib/i18n";
+import { CommercialProjectModal } from "@/components/modals/CommercialProjectModal";
 
 export const ContactSection: React.FC = () => {
   const { language } = useI18n();
   const [copied, setCopied] = useState(false);
+  const [isCommercialModalOpen, setIsCommercialModalOpen] = useState(false);
 
   const handleCopy = () => {
     navigator.clipboard.writeText(personalData.telegramUrl);
@@ -89,108 +91,154 @@ export const ContactSection: React.FC = () => {
               <div className="absolute left-0 top-0 bottom-0 w-px bg-gradient-to-b from-gray-600 via-gray-700 to-transparent"></div>
               <p className="text-gray-400 leading-relaxed text-lg">
                 {language === "en"
-                  ? "Contact me via Telegram to discuss details. I usually respond within an hour during working hours."
-                  : "Свяжитесь со мной через Telegram для обсуждения деталей. Обычно отвечаю в течение часа в рабочее время."}
+                  ? "Contact me via Telegram for quick discussions or use the commercial project form for business inquiries. I usually respond within an hour during working hours."
+                  : "Свяжитесь со мной через Telegram для быстрых обсуждений или используйте форму коммерческих проектов для деловых запросов. Обычно отвечаю в течение часа в рабочее время."}
               </p>
             </div>
 
             {/* Contact Methods */}
-            <div className="space-y-8">
-              {/* Telegram */}
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.3 }}
-                className="group cursor-pointer"
-              >
-                <div className="flex items-center justify-between py-6 border-b border-gray-800 group-hover:border-gray-600 transition-all duration-300">
-                  <div className="flex items-center space-x-6">
-                    <span className="font-mono text-sm text-gray-500 w-20">
-                      01
-                    </span>
-                    <div>
-                      <span className="font-mono text-sm text-gray-500 uppercase tracking-wider block mb-1">
-                        Telegram
+            <div className="space-y-16">
+              {/* Telegram Section */}
+              <div className="space-y-8">
+                <motion.div
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: 0.3 }}
+                  className="group cursor-pointer"
+                >
+                  <div className="flex items-center justify-between py-6 border-b border-gray-800 group-hover:border-gray-600 transition-all duration-300">
+                    <div className="flex items-center space-x-6">
+                      <span className="font-mono text-sm text-gray-500 w-20">
+                        01
                       </span>
-                      <a
-                        href={personalData.telegramUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="font-mono text-xl text-white group-hover:text-gray-300 transition-colors"
+                      <div>
+                        <span className="font-mono text-sm text-gray-500 uppercase tracking-wider block mb-1">
+                          Telegram
+                        </span>
+                        <a
+                          href={personalData.telegramUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="font-mono text-xl text-white group-hover:text-gray-300 transition-colors"
+                        >
+                          {personalData.telegramUrl.replace(
+                            "https://t.me/",
+                            "@"
+                          )}
+                        </a>
+                      </div>
+                    </div>
+                    <div className="flex items-center space-x-4">
+                      <div className="flex items-center space-x-2">
+                        <div
+                          className={`w-2 h-2 rounded-full ${
+                            workStatus.isOnline ? "bg-green-400" : "bg-red-400"
+                          }`}
+                        ></div>
+                        <span className="font-mono text-xs text-gray-400">
+                          {workStatus.isOnline
+                            ? language === "en"
+                              ? "Online"
+                              : "На связи"
+                            : language === "en"
+                              ? "Offline"
+                              : "Не на связи"}
+                        </span>
+                      </div>
+                      <motion.div
+                        className="w-6 h-6 border border-gray-600 group-hover:border-gray-400 transition-colors flex items-center justify-center"
+                        whileHover={{ rotate: 45 }}
                       >
-                        {personalData.telegramUrl.replace("https://t.me/", "@")}
-                      </a>
+                        <span className="block w-3 h-px bg-gray-400"></span>
+                        <span className="absolute w-px h-3 bg-gray-400"></span>
+                      </motion.div>
                     </div>
                   </div>
-                  <div className="flex items-center space-x-4">
-                    <div className="flex items-center space-x-2">
-                      <div
-                        className={`w-2 h-2 rounded-full ${
-                          workStatus.isOnline ? "bg-green-400" : "bg-red-400"
-                        }`}
-                      ></div>
-                      <span className="font-mono text-xs text-gray-400">
-                        {workStatus.isOnline
-                          ? language === "en"
-                            ? "Online"
-                            : "На связи"
-                          : language === "en"
-                          ? "Offline"
-                          : "Не на связи"}
+                </motion.div>
+
+                {/* Telegram Actions */}
+                <motion.div
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: 0.4 }}
+                  className="flex flex-col sm:flex-row gap-6 pl-26"
+                >
+                  <motion.a
+                    href={personalData.telegramUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    whileHover={{ x: 10 }}
+                    className="group flex items-center space-x-4 text-white hover:text-gray-300 transition-colors"
+                  >
+                    <span className="font-mono text-sm tracking-wider uppercase">
+                      {language === "en"
+                        ? "Send message"
+                        : "Написать сообщение"}
+                    </span>
+                    <div className="w-12 h-px bg-white" />
+                    <div className="w-1 h-1 bg-white rounded-full group-hover:rotate-45 group-hover:rounded-none group-hover:scale-110 transition-all duration-300" />
+                  </motion.a>
+
+                  <motion.button
+                    onClick={handleCopy}
+                    whileHover={{ x: 10 }}
+                    className="group flex items-center space-x-4 text-gray-400 hover:text-white transition-colors"
+                  >
+                    <span className="font-mono text-sm tracking-wider uppercase">
+                      {copied
+                        ? language === "en"
+                          ? "Copied!"
+                          : "Скопировано!"
+                        : language === "en"
+                          ? "Copy username"
+                          : "Скопировать ник"}
+                    </span>
+                    <div className="w-10 h-px bg-gray-400 group-hover:bg-white transition-colors" />
+                    <div className="w-1 h-1 bg-gray-400 group-hover:bg-white rounded-full group-hover:rotate-45 group-hover:rounded-none group-hover:scale-110 transition-all duration-300" />
+                  </motion.button>
+                </motion.div>
+              </div>
+
+              {/* Email Section */}
+              <div className="space-y-8">
+                <motion.div
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.6, delay: 0.5 }}
+                  className="group cursor-pointer"
+                  onClick={() => setIsCommercialModalOpen(true)}
+                >
+                  <div className="flex items-center justify-between py-6 border-b border-gray-800 group-hover:border-gray-600 transition-all duration-300">
+                    <div className="flex items-center space-x-6">
+                      <span className="font-mono text-sm text-gray-500 w-20">
+                        02
                       </span>
+                      <div>
+                        <span className="font-mono text-sm text-gray-500 uppercase tracking-wider block mb-1">
+                          {language === "en"
+                            ? "Commercial Projects"
+                            : "Коммерческие проекты"}
+                        </span>
+                        <span className="font-mono text-xl text-white group-hover:text-gray-300 transition-colors">
+                          {personalData.commercialEmail}
+                        </span>
+                      </div>
                     </div>
-                    <motion.div
-                      className="w-6 h-6 border border-gray-600 group-hover:border-gray-400 transition-colors flex items-center justify-center"
-                      whileHover={{ rotate: 45 }}
-                    >
-                      <span className="block w-3 h-px bg-gray-400"></span>
-                      <span className="absolute w-px h-3 bg-gray-400"></span>
-                    </motion.div>
+                    <div className="flex items-center space-x-4">
+                      <motion.div
+                        className="w-6 h-6 border border-gray-600 group-hover:border-gray-400 transition-colors flex items-center justify-center"
+                        whileHover={{ rotate: 45 }}
+                      >
+                        <span className="block w-3 h-px bg-gray-400"></span>
+                        <span className="absolute w-px h-3 bg-gray-400"></span>
+                      </motion.div>
+                    </div>
                   </div>
-                </div>
-              </motion.div>
-
-              {/* Actions */}
-              <motion.div
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6, delay: 0.4 }}
-                className="flex flex-col sm:flex-row gap-6 pl-26"
-              >
-                <motion.a
-                  href={personalData.telegramUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  whileHover={{ x: 10 }}
-                  className="group flex items-center space-x-4 text-white hover:text-gray-300 transition-colors"
-                >
-                  <span className="font-mono text-sm tracking-wider uppercase">
-                    {language === "en" ? "Send message" : "Написать сообщение"}
-                  </span>
-                  <div className="w-12 h-px bg-white" />
-                  <div className="w-1 h-1 bg-white rounded-full group-hover:rotate-45 group-hover:rounded-none group-hover:scale-110 transition-all duration-300" />
-                </motion.a>
-
-                <motion.button
-                  onClick={handleCopy}
-                  whileHover={{ x: 10 }}
-                  className="group flex items-center space-x-4 text-gray-400 hover:text-white transition-colors"
-                >
-                  <span className="font-mono text-sm tracking-wider uppercase">
-                    {copied
-                      ? language === "en"
-                        ? "Copied!"
-                        : "Скопировано!"
-                      : language === "en"
-                      ? "Copy username"
-                      : "Скопировать ник"}
-                  </span>
-                  <div className="w-10 h-px bg-gray-400 group-hover:bg-white transition-colors" />
-                  <div className="w-1 h-1 bg-gray-400 group-hover:bg-white rounded-full group-hover:rotate-45 group-hover:rounded-none group-hover:scale-110 transition-all duration-300" />
-                </motion.button>
-              </motion.div>
+                </motion.div>
+              </div>
             </div>
           </motion.div>
 
@@ -243,6 +291,13 @@ export const ContactSection: React.FC = () => {
           </motion.div>
         </div>
       </div>
+
+      {/* Commercial Project Modal */}
+      <CommercialProjectModal
+        isOpen={isCommercialModalOpen}
+        onClose={() => setIsCommercialModalOpen(false)}
+        language={language}
+      />
     </section>
   );
 };

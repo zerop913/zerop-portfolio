@@ -13,41 +13,9 @@ import { I18nProvider } from "@/lib/i18n";
 import { CookieBanner } from "@/components/ui/CookieBanner";
 import { AnalyticsTracker } from "@/components/analytics/AnalyticsTracker";
 import { UserProfileManager } from "@/components/analytics/UserProfileManager";
+import { generatePageMetadata, generateJsonLd } from "@/lib/seo";
 
-export const metadata: Metadata = {
-  title: "Ivan Smolin - Web Developer",
-  description:
-    "Специализируюсь на веб-разработке и создании ботов. Работаю с современными технологиями для создания качественных цифровых решений.",
-  keywords: [
-    "Web Developer",
-    "React",
-    "Next.js",
-    "TypeScript",
-    "Bot Development",
-  ],
-  authors: [{ name: "Ivan Smolin" }],
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-video-preview": -1,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-    },
-  },
-  manifest: "/manifest.json",
-  icons: {
-    icon: [
-      { url: "/favicon.svg", type: "image/svg+xml" },
-      { url: "/favicon-16x16.svg", sizes: "16x16", type: "image/svg+xml" },
-      { url: "/favicon-32x32.svg", sizes: "32x32", type: "image/svg+xml" },
-    ],
-    shortcut: "/favicon.svg",
-    apple: "/favicon.svg",
-  },
-};
+export const metadata: Metadata = generatePageMetadata("home", "ru");
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -61,6 +29,38 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ru" className="dark" suppressHydrationWarning>
+      <head>
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="theme-color" content="#000000" />
+        <meta name="msapplication-TileColor" content="#000000" />
+
+        {/* Языковые альтернативы */}
+        <link rel="alternate" hrefLang="ru" href="https://ivan-smolin.ru/" />
+        <link rel="alternate" hrefLang="en" href="https://ivan-smolin.ru/" />
+        <link
+          rel="alternate"
+          hrefLang="x-default"
+          href="https://ivan-smolin.ru/"
+        />
+
+        {/* JSON-LD структурированные данные */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: generateJsonLd("person") }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: generateJsonLd("website") }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: generateJsonLd("service") }}
+        />
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: generateJsonLd("breadcrumb") }}
+        />
+      </head>
       <body
         className="font-sans antialiased bg-black text-white selection:bg-white selection:text-black"
         suppressHydrationWarning
