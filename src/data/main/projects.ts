@@ -99,6 +99,77 @@ export const projects: Project[] = [
   {
     id: 2,
     title: {
+      ru: "DrivePulse - Подбор автомобилей",
+      en: "DrivePulse - Car Selection Service",
+    },
+    description: {
+      ru: "Профессиональный сервис по подбору и проверке автомобилей с полной диагностикой и юридической защитой для безопасных покупок.",
+      en: "Professional car selection and inspection service with comprehensive diagnostics and legal protection for safe purchases.",
+    },
+    detailedDescription: {
+      ru: "Комплексная платформа для подбора автомобилей, предоставляющая полный спектр услуг: от поиска и диагностики до юридического сопровождения сделки. Сервис помогает клиентам избежать проблемных автомобилей и обеспечивает безопасную покупку с гарантией качества.",
+      en: "Comprehensive car selection platform providing a full range of services: from search and diagnostics to legal transaction support. The service helps clients avoid problematic cars and ensures safe purchases with quality guarantee.",
+    },
+    technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
+    liveUrl: "https://drivepulse.vercel.app/",
+    category: "Business",
+    isOrder: false,
+    features: {
+      ru: [
+        "Подбор автомобилей под ключ",
+        "Выездная диагностика",
+        "Проверка истории автомобиля",
+        "Юридическое сопровождение",
+        "Система отзывов клиентов",
+        "Адаптивный дизайн",
+        "Контактная форма",
+      ],
+      en: [
+        "Turnkey car selection",
+        "Mobile diagnostics",
+        "Vehicle history check",
+        "Legal support",
+        "Client review system",
+        "Responsive design",
+        "Contact form",
+      ],
+    },
+    challenges: {
+      ru: [
+        "Создание доверительного интерфейса для дорогих покупок",
+        "Представление сложных автомобильных услуг",
+        "Демонстрация экспертности и надежности",
+      ],
+      en: [
+        "Creating a trustworthy interface for expensive purchases",
+        "Presenting complex automotive services",
+        "Demonstrating expertise and reliability",
+      ],
+    },
+    results: {
+      ru: [
+        "Современная презентация автосервиса",
+        "Увеличение доверия клиентов",
+        "Удобное представление услуг и цен",
+      ],
+      en: [
+        "Modern automotive service presentation",
+        "Increased client trust",
+        "Convenient service and pricing display",
+      ],
+    },
+    timeline: {
+      ru: "1 неделя",
+      en: "1 week",
+    },
+    role: {
+      ru: "Frontend разработчик",
+      en: "Frontend developer",
+    },
+  },
+  {
+    id: 3,
+    title: {
       ru: "ДомВектор",
       en: "DomVector",
     },
@@ -167,7 +238,7 @@ export const projects: Project[] = [
     },
   },
   {
-    id: 3,
+    id: 4,
     title: {
       ru: "Интеграция 1С и YandexGPT",
       en: "1C and YandexGPT Integration",
@@ -215,7 +286,7 @@ export const projects: Project[] = [
     },
   },
   {
-    id: 4,
+    id: 5,
     title: {
       ru: "AI Care Pharmacy",
       en: "AI Care Pharmacy",
@@ -243,7 +314,7 @@ export const projects: Project[] = [
   },
 
   {
-    id: 5,
+    id: 6,
     title: {
       ru: "Портфолио для разработчика 1С",
       en: "Portfolio for 1C Developer",
@@ -304,73 +375,6 @@ export const projects: Project[] = [
     timeline: {
       ru: "1 неделя",
       en: "1 week",
-    },
-    role: {
-      ru: "Frontend разработчик",
-      en: "Frontend developer",
-    },
-  },
-  {
-    id: 6,
-    title: {
-      ru: "Обучение сборке Кубика Рубика",
-      en: "Rubik's Cube Assembly Training",
-    },
-    description: {
-      ru: "Интерактивное веб-приложение для обучения начинающих сборке Кубика Рубика с пошаговыми инструкциями и визуализацией.",
-      en: "Interactive web application for teaching beginners how to assemble a Rubik's Cube with step-by-step instructions and visualization.",
-    },
-    detailedDescription: {
-      ru: "Образовательная платформа для изучения алгоритмов сборки Кубика Рубика. Включает интерактивные уроки, 3D-визуализацию поворотов, пошаговые инструкции и систему отслеживания прогресса обучения.",
-      en: "Educational platform for learning Rubik's Cube solving algorithms. Includes interactive lessons, 3D rotation visualization, step-by-step instructions and learning progress tracking system.",
-    },
-    technologies: ["React", "Tailwind CSS", "Interactive UI"],
-    liveUrl: "https://zerocubes.vercel.app/",
-    category: "Education",
-    isOrder: false,
-    features: {
-      ru: [
-        "Интерактивные уроки сборки",
-        "3D-визуализация кубика",
-        "Пошаговые алгоритмы",
-        "Система прогресса",
-        "Адаптивный интерфейс",
-      ],
-      en: [
-        "Interactive assembly lessons",
-        "3D cube visualization",
-        "Step-by-step algorithms",
-        "Progress system",
-        "Responsive interface",
-      ],
-    },
-    challenges: {
-      ru: [
-        "Создание понятной визуализации алгоритмов",
-        "Разработка интерактивного интерфейса",
-        "Оптимизация для мобильных устройств",
-      ],
-      en: [
-        "Creating clear algorithm visualization",
-        "Developing interactive interface",
-        "Mobile device optimization",
-      ],
-    },
-    results: {
-      ru: [
-        "Упрощение процесса обучения сборке",
-        "Высокая вовлеченность пользователей",
-        "Положительные отзывы от начинающих",
-      ],
-      en: [
-        "Simplified learning process",
-        "High user engagement",
-        "Positive feedback from beginners",
-      ],
-    },
-    timeline: {
-      ru: "2 месяца",
-      en: "2 months",
     },
     role: {
       ru: "Frontend разработчик",

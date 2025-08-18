@@ -265,14 +265,14 @@ export const Header: React.FC = () => {
                                     language
                                   ).toLowerCase()}`
                               : language === "en"
-                              ? `I'm currently ${getLocalizedText(
-                                  personalData.workSchedule.messages.offline,
-                                  language
-                                ).toLowerCase()}`
-                              : `Я сейчас ${getLocalizedText(
-                                  personalData.workSchedule.messages.offline,
-                                  language
-                                ).toLowerCase()}`}
+                                ? `I'm currently ${getLocalizedText(
+                                    personalData.workSchedule.messages.offline,
+                                    language
+                                  ).toLowerCase()}`
+                                : `Я сейчас ${getLocalizedText(
+                                    personalData.workSchedule.messages.offline,
+                                    language
+                                  ).toLowerCase()}`}
                           </span>
                         </div>
 
