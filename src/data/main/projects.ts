@@ -170,6 +170,33 @@ export const projects: Project[] = [
   {
     id: 3,
     title: {
+      ru: "AI Care Pharmacy",
+      en: "AI Care Pharmacy",
+    },
+    description: {
+      ru: "Инновационная сеть аптек с ИИ-консультированием для персонализированного обслуживания клиентов. Проект объединяет традиционные фармацевтические услуги с передовыми AI-технологиями.",
+      en: "Innovative pharmacy network with AI consulting for personalized customer service. The project combines traditional pharmaceutical services with advanced AI technologies.",
+    },
+    detailedDescription: {
+      ru: "Современная платформа для сети аптек, интегрирующая искусственный интеллект для предоставления персонализированных консультаций. ",
+      en: "Modern platform for pharmacy network integrating artificial intelligence to provide personalized consultations.",
+    },
+    technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
+    liveUrl: "https://aicarepharmacy.com/",
+    category: "Healthcare",
+    isOrder: true,
+    timeline: {
+      ru: "2 недели",
+      en: "2 weeks",
+    },
+    role: {
+      ru: "Frontend разработчик",
+      en: "Frontend developer",
+    },
+  },
+  {
+    id: 4,
+    title: {
       ru: "ДомВектор",
       en: "DomVector",
     },
@@ -238,7 +265,7 @@ export const projects: Project[] = [
     },
   },
   {
-    id: 4,
+    id: 5,
     title: {
       ru: "Интеграция 1С и YandexGPT",
       en: "1C and YandexGPT Integration",
@@ -285,34 +312,6 @@ export const projects: Project[] = [
       en: "Full-stack developer",
     },
   },
-  {
-    id: 5,
-    title: {
-      ru: "AI Care Pharmacy",
-      en: "AI Care Pharmacy",
-    },
-    description: {
-      ru: "Инновационная сеть аптек с ИИ-консультированием для персонализированного обслуживания клиентов. Проект объединяет традиционные фармацевтические услуги с передовыми AI-технологиями.",
-      en: "Innovative pharmacy network with AI consulting for personalized customer service. The project combines traditional pharmaceutical services with advanced AI technologies.",
-    },
-    detailedDescription: {
-      ru: "Современная платформа для сети аптек, интегрирующая искусственный интеллект для предоставления персонализированных консультаций. ",
-      en: "Modern platform for pharmacy network integrating artificial intelligence to provide personalized consultations.",
-    },
-    technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
-    liveUrl: "https://aicarepharmacy.com/",
-    category: "Healthcare",
-    isOrder: true,
-    timeline: {
-      ru: "2 недели",
-      en: "2 weeks",
-    },
-    role: {
-      ru: "Frontend разработчик",
-      en: "Frontend developer",
-    },
-  },
-
   {
     id: 6,
     title: {

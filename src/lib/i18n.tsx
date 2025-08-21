@@ -1,6 +1,6 @@
 "use client";
 
-import React, { createContext, useContext } from "react";
+import React, { createContext, useContext, useEffect } from "react";
 import { useLocalStorage } from "./useLocalStorage";
 import { translations } from "@/data/common/translations";
 
@@ -22,6 +22,20 @@ export const I18nProvider: React.FC<{ children: React.ReactNode }> = ({
     "language",
     "ru"
   );
+
+  useEffect(() => {
+    if (typeof window !== "undefined" && isHydrated) {
+      const urlParams = new URLSearchParams(window.location.search);
+      const langParam = urlParams.get("lang") as Language;
+
+      if (langParam && (langParam === "ru" || langParam === "en")) {
+        setLanguage(langParam);
+        const newUrl = new URL(window.location.href);
+        newUrl.searchParams.delete("lang");
+        window.history.replaceState({}, "", newUrl.toString());
+      }
+    }
+  }, [isHydrated, setLanguage]);
 
   const t = (key: string, fallback?: string) => {
     return (

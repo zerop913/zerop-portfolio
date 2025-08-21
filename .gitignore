@@ -40,3 +40,13 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
+# API??
+/src/app/api/v1/
+/src/app/devtools/
+/src/components/pages/
+/src/components/sections/devtools/
+/src/components/ui/APITester.tsx
+/src/components/ui/CodeBlock.tsx
+/src/components/ui/ResultDisplay.tsx
+/src/data/devtools/
+/src/lib/devtools/
