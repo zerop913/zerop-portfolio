@@ -30,20 +30,24 @@ export const PricingSection: React.FC = () => {
   }
 
   const formatPrice = (tier: (typeof pricingData)[0]) => {
-    if (tier.price.to) {
-      return `${tier.price.from.toLocaleString()} - ${tier.price.to.toLocaleString()} ${
-        tier.price.currency
+    const currentPrice = tier.price[language as keyof typeof tier.price];
+
+    if (currentPrice.to) {
+      return `${currentPrice.from.toLocaleString()} - ${currentPrice.to.toLocaleString()} ${
+        currentPrice.currency
       }`;
     }
     return `${
       language === "en" ? "from" : "от"
-    } ${tier.price.from.toLocaleString()} ${tier.price.currency}`;
+    } ${currentPrice.from.toLocaleString()} ${currentPrice.currency}`;
   };
 
   const handlePricingCardClick = (tier: (typeof pricingData)[0]) => {
+    const currentPrice = tier.price[language as keyof typeof tier.price];
     trackClick("pricing", `pricing_${tier.id}`, {
-      priceFrom: tier.price.from,
-      priceTo: tier.price.to,
+      priceFrom: currentPrice.from,
+      priceTo: currentPrice.to,
+      currency: currentPrice.currency,
       features: tier.features[language].length,
       technologies: tier.technologies,
     });
@@ -111,117 +115,124 @@ export const PricingSection: React.FC = () => {
 
         {/* Pricing Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-20">
-          {pricingData.map((tier, index) => (
-            <motion.div
-              key={tier.id}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: index * 0.1 }}
-              onHoverStart={() => handlePricingCardHover(tier, true)}
-              onHoverEnd={() => handlePricingCardHover(tier, false)}
-              onClick={() => handlePricingCardClick(tier)}
-              className={`group relative cursor-pointer ${
-                tier.popular ? "lg:col-span-1" : ""
-              }`}
-            >
-              {/* Popular Badge */}
-              {tier.popular && (
-                <div className="absolute -top-3 left-6 bg-white text-black px-4 py-1 text-xs font-mono uppercase tracking-wider z-10">
-                  Популярно
-                </div>
-              )}
+          {pricingData.map((tier, index) => {
+            const currentPrice =
+              tier.price[language as keyof typeof tier.price];
 
-              <div className="border border-gray-800 group-hover:border-gray-600 transition-all duration-300 bg-gray-900/20 p-8 h-full">
-                {/* Header */}
-                <div className="mb-8">
-                  <div className="flex items-center justify-between mb-4">
-                    <span className="font-mono text-sm text-gray-500 uppercase tracking-wider">
-                      {String(index + 1).padStart(2, "0")}
-                    </span>
-                    <span className="font-mono text-sm text-gray-400">
-                      {getLocalizedText(tier.timeline, language)}
-                    </span>
+            return (
+              <motion.div
+                key={tier.id}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: index * 0.1 }}
+                onHoverStart={() => handlePricingCardHover(tier, true)}
+                onHoverEnd={() => handlePricingCardHover(tier, false)}
+                onClick={() => handlePricingCardClick(tier)}
+                className={`group relative cursor-pointer ${
+                  tier.popular ? "lg:col-span-1" : ""
+                }`}
+              >
+                {/* Popular Badge */}
+                {tier.popular && (
+                  <div className="absolute -top-3 left-6 bg-white text-black px-4 py-1 text-xs font-mono uppercase tracking-wider z-10">
+                    {language === "en" ? "Popular" : "Популярно"}
                   </div>
-                  <h3 className="font-grotesk text-2xl font-light text-white mb-2">
-                    {getLocalizedText(tier.title, language)}
-                  </h3>
-                  <p className="text-gray-400 text-sm leading-relaxed mb-6">
-                    {getLocalizedText(tier.description, language)}
-                  </p>
+                )}
 
-                  {/* Price */}
-                  <div className="mb-6">
-                    <div className="font-mono text-3xl text-white mb-1">
-                      {formatPrice(tier)}
-                    </div>
-                    <div className="font-mono text-xs text-gray-500 uppercase tracking-wider">
-                      {getLocalizedText(tier.price.period, language)}
-                    </div>
-                    {tier.note && (
-                      <div className="font-mono text-xs text-gray-400 mt-2">
-                        {getLocalizedText(tier.note, language)}
-                      </div>
-                    )}
-                  </div>
-                </div>
-
-                {/* Features */}
-                <div className="mb-8">
-                  <span className="font-mono text-xs text-gray-500 uppercase tracking-wider block mb-4">
-                    {language === "en" ? "What's included" : "Что входит"}
-                  </span>
-                  <ul className="space-y-3">
-                    {(language === "en"
-                      ? tier.features.en
-                      : tier.features.ru
-                    ).map((feature, featureIndex) => (
-                      <li
-                        key={featureIndex}
-                        className="flex items-start space-x-3"
-                      >
-                        <div className="w-1 h-1 bg-gray-400 rounded-full mt-2 flex-shrink-0" />
-                        <span className="text-gray-300 text-sm">{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                {/* Technologies */}
-                <div className="mb-8">
-                  <span className="font-mono text-xs text-gray-500 uppercase tracking-wider block mb-4">
-                    {language === "en" ? "Technologies" : "Технологии"}
-                  </span>
-                  <div className="flex flex-wrap gap-2">
-                    {tier.technologies.map((tech, techIndex) => (
-                      <span
-                        key={techIndex}
-                        className="px-3 py-1 border border-gray-700 text-gray-300 text-xs font-mono"
-                      >
-                        {tech}
+                <div className="border border-gray-800 group-hover:border-gray-600 transition-all duration-300 bg-gray-900/20 p-8 h-full">
+                  {/* Header */}
+                  <div className="mb-8">
+                    <div className="flex items-center justify-between mb-4">
+                      <span className="font-mono text-sm text-gray-500 uppercase tracking-wider">
+                        {String(index + 1).padStart(2, "0")}
                       </span>
-                    ))}
-                  </div>
-                </div>
+                      <span className="font-mono text-sm text-gray-400">
+                        {getLocalizedText(tier.timeline, language)}
+                      </span>
+                    </div>
+                    <h3 className="font-grotesk text-2xl font-light text-white mb-2">
+                      {getLocalizedText(tier.title, language)}
+                    </h3>
+                    <p className="text-gray-400 text-sm leading-relaxed mb-6">
+                      {getLocalizedText(tier.description, language)}
+                    </p>
 
-                {/* CTA */}
-                <motion.div className="mt-auto" whileHover={{ x: 10 }}>
-                  <a
-                    href="#contact"
-                    className="group/cta flex items-center space-x-4 text-white hover:text-gray-300 transition-colors"
-                  >
-                    <span className="font-mono text-sm tracking-wider uppercase">
-                      {language === "en"
-                        ? "Discuss project"
-                        : "Обсудить проект"}
+                    {/* Price */}
+                    <div className="mb-6">
+                      <div className="font-mono text-3xl text-white mb-1">
+                        {formatPrice(tier)}
+                      </div>
+                      <div className="font-mono text-xs text-gray-500 uppercase tracking-wider">
+                        {getLocalizedText(currentPrice.period, language)}
+                      </div>
+                      {tier.note && (
+                        <div className="font-mono text-xs text-gray-400 mt-2">
+                          {getLocalizedText(tier.note, language)}
+                        </div>
+                      )}
+                    </div>
+                  </div>
+
+                  {/* Features */}
+                  <div className="mb-8">
+                    <span className="font-mono text-xs text-gray-500 uppercase tracking-wider block mb-4">
+                      {language === "en" ? "What's included" : "Что входит"}
                     </span>
-                    <div className="w-12 h-px bg-white" />
-                    <div className="w-1 h-1 bg-white rounded-full group-hover/cta:rotate-45 group-hover/cta:rounded-none group-hover/cta:scale-110 transition-all duration-300" />
-                  </a>
-                </motion.div>
-              </div>
-            </motion.div>
-          ))}
+                    <ul className="space-y-3">
+                      {(language === "en"
+                        ? tier.features.en
+                        : tier.features.ru
+                      ).map((feature, featureIndex) => (
+                        <li
+                          key={featureIndex}
+                          className="flex items-start space-x-3"
+                        >
+                          <div className="w-1 h-1 bg-gray-400 rounded-full mt-2 flex-shrink-0" />
+                          <span className="text-gray-300 text-sm">
+                            {feature}
+                          </span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
+                  {/* Technologies */}
+                  <div className="mb-8">
+                    <span className="font-mono text-xs text-gray-500 uppercase tracking-wider block mb-4">
+                      {language === "en" ? "Technologies" : "Технологии"}
+                    </span>
+                    <div className="flex flex-wrap gap-2">
+                      {tier.technologies.map((tech, techIndex) => (
+                        <span
+                          key={techIndex}
+                          className="px-3 py-1 border border-gray-700 text-gray-300 text-xs font-mono"
+                        >
+                          {tech}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* CTA */}
+                  <motion.div className="mt-auto" whileHover={{ x: 10 }}>
+                    <a
+                      href="#contact"
+                      className="group/cta flex items-center space-x-4 text-white hover:text-gray-300 transition-colors"
+                    >
+                      <span className="font-mono text-sm tracking-wider uppercase">
+                        {language === "en"
+                          ? "Discuss project"
+                          : "Обсудить проект"}
+                      </span>
+                      <div className="w-12 h-px bg-white" />
+                      <div className="w-1 h-1 bg-white rounded-full group-hover/cta:rotate-45 group-hover/cta:rounded-none group-hover/cta:scale-110 transition-all duration-300" />
+                    </a>
+                  </motion.div>
+                </div>
+              </motion.div>
+            );
+          })}
         </div>
 
         {/* Additional Info */}

@@ -50,3 +50,6 @@ next-env.d.ts
 /src/components/ui/ResultDisplay.tsx
 /src/data/devtools/
 /src/lib/devtools/
+
+/src/app/promo/
+/src/components/sections/promo/

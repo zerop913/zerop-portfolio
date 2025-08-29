@@ -9,12 +9,23 @@ export interface PricingTier {
     en: string;
   };
   price: {
-    from: number;
-    to?: number;
-    currency: string;
-    period: {
-      ru: string;
-      en: string;
+    ru: {
+      from: number;
+      to?: number;
+      currency: string;
+      period: {
+        ru: string;
+        en: string;
+      };
+    };
+    en: {
+      from: number;
+      to?: number;
+      currency: string;
+      period: {
+        ru: string;
+        en: string;
+      };
     };
   };
   features: {
@@ -45,12 +56,23 @@ export const pricingData: PricingTier[] = [
       en: "Modern landing page for your business",
     },
     price: {
-      from: 15000,
-      to: 35000,
-      currency: "₽",
-      period: {
-        ru: "за проект",
-        en: "per project",
+      ru: {
+        from: 15000,
+        to: 35000,
+        currency: "₽",
+        period: {
+          ru: "за проект",
+          en: "per project",
+        },
+      },
+      en: {
+        from: 260,
+        to: 610,
+        currency: "$",
+        period: {
+          ru: "за проект",
+          en: "per project",
+        },
       },
     },
     features: {
@@ -88,12 +110,23 @@ export const pricingData: PricingTier[] = [
       en: "Full-featured web application with modern stack",
     },
     price: {
-      from: 50000,
-      to: 150000,
-      currency: "₽",
-      period: {
-        ru: "за проект",
-        en: "per project",
+      ru: {
+        from: 50000,
+        to: 150000,
+        currency: "₽",
+        period: {
+          ru: "за проект",
+          en: "per project",
+        },
+      },
+      en: {
+        from: 930,
+        to: 2800,
+        currency: "$",
+        period: {
+          ru: "за проект",
+          en: "per project",
+        },
       },
     },
     features: {
@@ -132,12 +165,23 @@ export const pricingData: PricingTier[] = [
       en: "Online store with payment system and product management",
     },
     price: {
-      from: 80000,
-      to: 200000,
-      currency: "₽",
-      period: {
-        ru: "за проект",
-        en: "per project",
+      ru: {
+        from: 80000,
+        to: 200000,
+        currency: "₽",
+        period: {
+          ru: "за проект",
+          en: "per project",
+        },
+      },
+      en: {
+        from: 1500,
+        to: 3750,
+        currency: "$",
+        period: {
+          ru: "за проект",
+          en: "per project",
+        },
       },
     },
     features: {
@@ -175,12 +219,23 @@ export const pricingData: PricingTier[] = [
       en: "Database design and API development for your projects",
     },
     price: {
-      from: 30000,
-      to: 50000,
-      currency: "₽",
-      period: {
-        ru: "за проект",
-        en: "per project",
+      ru: {
+        from: 30000,
+        to: 50000,
+        currency: "₽",
+        period: {
+          ru: "за проект",
+          en: "per project",
+        },
+      },
+      en: {
+        from: 560,
+        to: 930,
+        currency: "$",
+        period: {
+          ru: "за проект",
+          en: "per project",
+        },
       },
     },
     features: {
