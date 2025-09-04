@@ -37,6 +37,7 @@ export interface Project {
     ru: string;
     en: string;
   };
+  hidePreview?: boolean;
 }
 
 export const projects: Project[] = [
@@ -98,6 +99,104 @@ export const projects: Project[] = [
   },
   {
     id: 2,
+    title: {
+      ru: "DrivePulse - Подбор автомобилей",
+      en: "DrivePulse - Car Selection Service",
+    },
+    description: {
+      ru: "Профессиональный сервис по подбору и проверке автомобилей с полной диагностикой и юридической защитой для безопасных покупок.",
+      en: "Professional car selection and inspection service with comprehensive diagnostics and legal protection for safe purchases.",
+    },
+    detailedDescription: {
+      ru: "Комплексная платформа для подбора автомобилей, предоставляющая полный спектр услуг: от поиска и диагностики до юридического сопровождения сделки. Сервис помогает клиентам избежать проблемных автомобилей и обеспечивает безопасную покупку с гарантией качества.",
+      en: "Comprehensive car selection platform providing a full range of services: from search and diagnostics to legal transaction support. The service helps clients avoid problematic cars and ensures safe purchases with quality guarantee.",
+    },
+    technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
+    liveUrl: "https://drivepulse.vercel.app/",
+    category: "Business",
+    isOrder: false,
+    features: {
+      ru: [
+        "Подбор автомобилей под ключ",
+        "Выездная диагностика",
+        "Проверка истории автомобиля",
+        "Юридическое сопровождение",
+        "Система отзывов клиентов",
+        "Адаптивный дизайн",
+        "Контактная форма",
+      ],
+      en: [
+        "Turnkey car selection",
+        "Mobile diagnostics",
+        "Vehicle history check",
+        "Legal support",
+        "Client review system",
+        "Responsive design",
+        "Contact form",
+      ],
+    },
+    challenges: {
+      ru: [
+        "Создание доверительного интерфейса для дорогих покупок",
+        "Представление сложных автомобильных услуг",
+        "Демонстрация экспертности и надежности",
+      ],
+      en: [
+        "Creating a trustworthy interface for expensive purchases",
+        "Presenting complex automotive services",
+        "Demonstrating expertise and reliability",
+      ],
+    },
+    results: {
+      ru: [
+        "Современная презентация автосервиса",
+        "Увеличение доверия клиентов",
+        "Удобное представление услуг и цен",
+      ],
+      en: [
+        "Modern automotive service presentation",
+        "Increased client trust",
+        "Convenient service and pricing display",
+      ],
+    },
+    timeline: {
+      ru: "1 неделя",
+      en: "1 week",
+    },
+    role: {
+      ru: "Frontend разработчик",
+      en: "Frontend developer",
+    },
+  },
+  {
+    id: 3,
+    title: {
+      ru: "AI Care Pharmacy",
+      en: "AI Care Pharmacy",
+    },
+    description: {
+      ru: "Инновационная сеть аптек с ИИ-консультированием для персонализированного обслуживания клиентов. Проект объединяет традиционные фармацевтические услуги с передовыми AI-технологиями.",
+      en: "Innovative pharmacy network with AI consulting for personalized customer service. The project combines traditional pharmaceutical services with advanced AI technologies.",
+    },
+    detailedDescription: {
+      ru: "Современная платформа для сети аптек, интегрирующая искусственный интеллект для предоставления персонализированных консультаций. ",
+      en: "Modern platform for pharmacy network integrating artificial intelligence to provide personalized consultations.",
+    },
+    technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
+    liveUrl: "https://aicarepharmacy.com/",
+    category: "Healthcare",
+    isOrder: true,
+    timeline: {
+      ru: "2 недели",
+      en: "2 weeks",
+    },
+    role: {
+      ru: "Frontend разработчик",
+      en: "Frontend developer",
+    },
+  },
+  {
+    id: 4,
     title: {
       ru: "Быстрая Баня",
       en: "Fast Banya",
@@ -174,104 +273,7 @@ export const projects: Project[] = [
       ru: "Frontend разработчик",
       en: "Frontend developer",
     },
-  },
-  {
-    id: 3,
-    title: {
-      ru: "DrivePulse - Подбор автомобилей",
-      en: "DrivePulse - Car Selection Service",
-    },
-    description: {
-      ru: "Профессиональный сервис по подбору и проверке автомобилей с полной диагностикой и юридической защитой для безопасных покупок.",
-      en: "Professional car selection and inspection service with comprehensive diagnostics and legal protection for safe purchases.",
-    },
-    detailedDescription: {
-      ru: "Комплексная платформа для подбора автомобилей, предоставляющая полный спектр услуг: от поиска и диагностики до юридического сопровождения сделки. Сервис помогает клиентам избежать проблемных автомобилей и обеспечивает безопасную покупку с гарантией качества.",
-      en: "Comprehensive car selection platform providing a full range of services: from search and diagnostics to legal transaction support. The service helps clients avoid problematic cars and ensures safe purchases with quality guarantee.",
-    },
-    technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
-    liveUrl: "https://drivepulse.vercel.app/",
-    category: "Business",
-    isOrder: false,
-    features: {
-      ru: [
-        "Подбор автомобилей под ключ",
-        "Выездная диагностика",
-        "Проверка истории автомобиля",
-        "Юридическое сопровождение",
-        "Система отзывов клиентов",
-        "Адаптивный дизайн",
-        "Контактная форма",
-      ],
-      en: [
-        "Turnkey car selection",
-        "Mobile diagnostics",
-        "Vehicle history check",
-        "Legal support",
-        "Client review system",
-        "Responsive design",
-        "Contact form",
-      ],
-    },
-    challenges: {
-      ru: [
-        "Создание доверительного интерфейса для дорогих покупок",
-        "Представление сложных автомобильных услуг",
-        "Демонстрация экспертности и надежности",
-      ],
-      en: [
-        "Creating a trustworthy interface for expensive purchases",
-        "Presenting complex automotive services",
-        "Demonstrating expertise and reliability",
-      ],
-    },
-    results: {
-      ru: [
-        "Современная презентация автосервиса",
-        "Увеличение доверия клиентов",
-        "Удобное представление услуг и цен",
-      ],
-      en: [
-        "Modern automotive service presentation",
-        "Increased client trust",
-        "Convenient service and pricing display",
-      ],
-    },
-    timeline: {
-      ru: "1 неделя",
-      en: "1 week",
-    },
-    role: {
-      ru: "Frontend разработчик",
-      en: "Frontend developer",
-    },
-  },
-  {
-    id: 4,
-    title: {
-      ru: "AI Care Pharmacy",
-      en: "AI Care Pharmacy",
-    },
-    description: {
-      ru: "Инновационная сеть аптек с ИИ-консультированием для персонализированного обслуживания клиентов. Проект объединяет традиционные фармацевтические услуги с передовыми AI-технологиями.",
-      en: "Innovative pharmacy network with AI consulting for personalized customer service. The project combines traditional pharmaceutical services with advanced AI technologies.",
-    },
-    detailedDescription: {
-      ru: "Современная платформа для сети аптек, интегрирующая искусственный интеллект для предоставления персонализированных консультаций. ",
-      en: "Modern platform for pharmacy network integrating artificial intelligence to provide personalized consultations.",
-    },
-    technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
-    liveUrl: "https://aicarepharmacy.com/",
-    category: "Healthcare",
-    isOrder: true,
-    timeline: {
-      ru: "2 недели",
-      en: "2 weeks",
-    },
-    role: {
-      ru: "Frontend разработчик",
-      en: "Frontend developer",
-    },
+    hidePreview: true,
   },
   {
     id: 5,

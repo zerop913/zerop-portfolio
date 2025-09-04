@@ -84,9 +84,13 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
             </div>
 
             {/* Content */}
-            <div className="flex flex-col lg:grid lg:grid-cols-2 h-[calc(98vh-100px)] sm:h-[calc(95vh-140px)]">
+            <div
+              className={`flex flex-col ${!project.hidePreview ? "lg:grid lg:grid-cols-2" : ""} h-[calc(98vh-100px)] sm:h-[calc(95vh-140px)]`}
+            >
               {/* Left Panel - Project Info */}
-              <div className="p-4 sm:p-8 overflow-y-auto lg:border-r border-gray-800 flex-1">
+              <div
+                className={`p-4 sm:p-8 overflow-y-auto ${!project.hidePreview ? "lg:border-r border-gray-800" : ""} flex-1`}
+              >
                 {/* Description */}
                 <div className="mb-12">
                   <h3 className="font-grotesk text-xl font-light text-white mb-6">
@@ -250,44 +254,46 @@ export const ProjectModal: React.FC<ProjectModalProps> = ({
                 </div>
               </div>
 
-              {/* Right Panel - Live Preview (Hidden on mobile) */}
-              <div className="hidden lg:block p-4 sm:p-8 bg-gray-900/20 flex-1 lg:flex-none">
-                {/* Preview Header */}
-                <div className="mb-4 sm:mb-6">
-                  <span className="font-mono text-xs sm:text-sm text-gray-500 uppercase tracking-wider">
-                    {t("preview")}
-                  </span>
-                </div>
+              {/* Right Panel - Live Preview (Hidden on mobile and conditionally hidden for certain projects) */}
+              {!project.hidePreview && (
+                <div className="hidden lg:block p-4 sm:p-8 bg-gray-900/20 flex-1 lg:flex-none">
+                  {/* Preview Header */}
+                  <div className="mb-4 sm:mb-6">
+                    <span className="font-mono text-xs sm:text-sm text-gray-500 uppercase tracking-wider">
+                      {t("preview")}
+                    </span>
+                  </div>
 
-                {/* Preview Container */}
-                {project.liveUrl ? (
-                  <div className="border border-gray-700 bg-white overflow-hidden w-full h-64 sm:h-80 lg:h-full">
-                    <iframe
-                      src={project.liveUrl}
-                      className="w-full h-full"
-                      title={`Preview of ${getLocalizedText(
-                        project.title,
-                        language
-                      )}`}
-                      loading="lazy"
-                      sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
-                    />
-                  </div>
-                ) : (
-                  <div className="w-full h-64 sm:h-80 lg:h-full border border-gray-700 bg-gray-800/50 flex items-center justify-center">
-                    <div className="text-center">
-                      <div className="w-12 h-12 sm:w-16 sm:h-16 border-2 border-gray-600 mx-auto mb-4 flex items-center justify-center">
-                        <span className="text-gray-500 text-lg sm:text-2xl">
-                          ×
-                        </span>
-                      </div>
-                      <p className="text-gray-500 font-mono text-xs sm:text-sm">
-                        {t("previewUnavailable")}
-                      </p>
+                  {/* Preview Container */}
+                  {project.liveUrl ? (
+                    <div className="border border-gray-700 bg-white overflow-hidden w-full h-64 sm:h-80 lg:h-full">
+                      <iframe
+                        src={project.liveUrl}
+                        className="w-full h-full"
+                        title={`Preview of ${getLocalizedText(
+                          project.title,
+                          language
+                        )}`}
+                        loading="lazy"
+                        sandbox="allow-scripts allow-same-origin allow-forms allow-popups"
+                      />
                     </div>
-                  </div>
-                )}
-              </div>
+                  ) : (
+                    <div className="w-full h-64 sm:h-80 lg:h-full border border-gray-700 bg-gray-800/50 flex items-center justify-center">
+                      <div className="text-center">
+                        <div className="w-12 h-12 sm:w-16 sm:h-16 border-2 border-gray-600 mx-auto mb-4 flex items-center justify-center">
+                          <span className="text-gray-500 text-lg sm:text-2xl">
+                            ×
+                          </span>
+                        </div>
+                        <p className="text-gray-500 font-mono text-xs sm:text-sm">
+                          {t("previewUnavailable")}
+                        </p>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
           </motion.div>
 
