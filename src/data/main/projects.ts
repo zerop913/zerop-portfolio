@@ -99,6 +99,85 @@ export const projects: Project[] = [
   {
     id: 2,
     title: {
+      ru: "Быстрая Баня",
+      en: "Fast Banya",
+    },
+    description: {
+      ru: "Современный веб-сайт для строительной компании, специализирующейся на постройке бань и саун под ключ с интерактивным калькулятором стоимости, галереей проектов и системой расчета.",
+      en: "Modern website for construction company specializing in turnkey banya and sauna construction with interactive cost calculator, project gallery and estimation system.",
+    },
+    detailedDescription: {
+      ru: "Одностраничная веб-платформа для компании 'Быстрая Баня', включающая интерактивный калькулятор для расчета стоимости строительства, каталог типов бань (русские, финские, турецкие, японские, бани-бочки), галерею выполненных проектов и детальную информацию о процессе строительства. Сайт выполнен в теплой натуральной цветовой гамме с креативными анимациями и современным дизайном.",
+      en: "Single-page web platform for 'Fast Banya' company, including interactive calculator for construction cost estimation, catalog of banya types (Russian, Finnish, Turkish, Japanese, barrel banyas), gallery of completed projects and detailed construction process information. The site features warm natural color palette with creative animations and modern design.",
+    },
+    technologies: ["Next.js", "React", "TypeScript", "Tailwind CSS"],
+    liveUrl: "https://быстрая-баня.рф/",
+    category: "Business",
+    isOrder: true,
+    features: {
+      ru: [
+        "Интерактивный калькулятор стоимости строительства",
+        "Каталог типов бань и саун с модальными окнами",
+        "Галерея выполненных проектов",
+        "Адаптивный дизайн с современными анимациями",
+        "SEO-оптимизация и структурированные данные",
+        "Контактная форма и карта преимуществ",
+        "Детальная информация о процессе строительства",
+        "Система выбора материалов и фундамента",
+      ],
+      en: [
+        "Interactive construction cost calculator",
+        "Banya and sauna types catalog with modals",
+        "Completed projects gallery",
+        "Responsive design with modern animations",
+        "SEO optimization and structured data",
+        "Contact form and advantages showcase",
+        "Detailed construction process information",
+        "Material and foundation selection system",
+      ],
+    },
+    challenges: {
+      ru: [
+        "Создание интуитивного калькулятора с мгновенным пересчетом",
+        "Разработка креативного дизайна вместо шаблонных решений",
+        "Реализация сложных анимаций с Framer Motion",
+        "Оптимизация производительности с Next.js 15",
+      ],
+      en: [
+        "Creating intuitive calculator with instant recalculation",
+        "Developing creative design instead of template solutions",
+        "Implementing complex animations with Framer Motion",
+        "Performance optimization with Next.js 15",
+      ],
+    },
+    results: {
+      ru: [
+        "Современный креативный дизайн с теплой цветовой палитрой",
+        "Интерактивный пользовательский опыт с плавными анимациями",
+        "Быстрый расчет стоимости за 2 минуты",
+        "Полная адаптивность на всех устройствах",
+        "SEO-оптимизированная структура",
+      ],
+      en: [
+        "Modern creative design with warm color palette",
+        "Interactive user experience with smooth animations",
+        "Quick cost estimation in 2 minutes",
+        "Full responsiveness on all devices",
+        "SEO-optimized structure",
+      ],
+    },
+    timeline: {
+      ru: "1 неделя",
+      en: "1 week",
+    },
+    role: {
+      ru: "Frontend разработчик",
+      en: "Frontend developer",
+    },
+  },
+  {
+    id: 3,
+    title: {
       ru: "DrivePulse - Подбор автомобилей",
       en: "DrivePulse - Car Selection Service",
     },
@@ -168,7 +247,7 @@ export const projects: Project[] = [
     },
   },
   {
-    id: 3,
+    id: 4,
     title: {
       ru: "AI Care Pharmacy",
       en: "AI Care Pharmacy",
@@ -195,7 +274,7 @@ export const projects: Project[] = [
     },
   },
   {
-    id: 4,
+    id: 5,
     title: {
       ru: "ДомВектор",
       en: "DomVector",
@@ -265,7 +344,7 @@ export const projects: Project[] = [
     },
   },
   {
-    id: 5,
+    id: 6,
     title: {
       ru: "Интеграция 1С и YandexGPT",
       en: "1C and YandexGPT Integration",
@@ -313,7 +392,7 @@ export const projects: Project[] = [
     },
   },
   {
-    id: 6,
+    id: 7,
     title: {
       ru: "Портфолио для разработчика 1С",
       en: "Portfolio for 1C Developer",
